@@ -1,0 +1,64 @@
+/* estilo modernizado para la página de construcción */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #222, #000);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.logo {
+  width: 160px;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #f1c40f;
+  text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+}
+
+p {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.strip {
+  width: 100%;
+  height: 60px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f1c40f,
+    #f1c40f 20px,
+    #333 20px,
+    #333 40px
+  );
+  background-size: 40px 40px;
+  animation: move 1s linear infinite;
+  margin-top: 2rem;
+}
+
+@keyframes move {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
