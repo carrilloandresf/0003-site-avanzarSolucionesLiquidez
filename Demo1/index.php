@@ -47,21 +47,14 @@
         }
         
         .speedometer {
-            background: conic-gradient(from 180deg, #10b981 0deg 60deg, #f59e0b 60deg 120deg, #dc2626 120deg 180deg);
-            border-radius: 200px 200px 0 0;
+            background: conic-gradient(from 270deg, #10b981 0deg 60deg, #f59e0b 60deg 120deg, #dc2626 120deg 180deg);
+            border-radius: 100% 100% 0 0;
             position: relative;
+            overflow: hidden;
         }
-        
-        .speedometer::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 40px;
-            background: #000;
-            border-radius: 0 0 100px 100px;
+
+        #needle {
+            transform-origin: bottom center;
         }
         
         .whatsapp-float {
@@ -136,10 +129,7 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <div class="text-black font-serif text-2xl font-bold">
-                        AVANZAR
-                        <span class="text-yellow-600 text-sm font-normal ml-2">Liquidez</span>
-                    </div>
+                    <img src="../assets/img/logo.jpeg" alt="AVANZAR Liquidez" class="h-10 w-auto">
                 </div>
                 
                 <!-- Navigation Menu -->
@@ -648,8 +638,8 @@
                         
                         <div class="relative w-64 h-32 mx-auto mb-8">
                             <div class="speedometer w-full h-full relative">
-                                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-24 bg-yellow-400 origin-bottom" id="needle" style="transform: translateX(-50%) rotate(0deg); transform-origin: bottom center;"></div>
-                                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="absolute bottom-0 left-1/2 w-1 h-24 bg-yellow-400" id="needle" style="transform: translateX(-50%) rotate(0deg);"></div>
+                                <div class="absolute bottom-2 left-1/2 w-4 h-4 bg-yellow-400 rounded-full" style="transform: translateX(-50%);"></div>
                             </div>
                             <div class="text-center mt-4">
                                 <div class="text-yellow-400 text-sm">Tasa de Interés</div>
