@@ -46,15 +46,16 @@
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #fff8e1 100%);
         }
         
-        .speedometer {
-            background: conic-gradient(from 270deg, #10b981 0deg 60deg, #f59e0b 60deg 120deg, #dc2626 120deg 180deg);
-            border-radius: 100% 100% 0 0;
+        .calculator-gauge {
+            width: 300px;
+            height: 150px;
             position: relative;
-            overflow: hidden;
+            margin: 0 auto;
         }
 
-        #needle {
-            transform-origin: bottom center;
+        .gauge-needle {
+            transform-origin: 150px 150px;
+            transition: transform 0.5s ease;
         }
         
         .whatsapp-float {
@@ -641,10 +642,20 @@
                     <div class="glassmorphism-dark rounded-2xl p-8">
                         <h3 class="font-serif text-2xl font-bold text-yellow-400 mb-6">Resultados</h3>
                         
-                        <div class="relative w-64 h-32 mx-auto mb-8">
-                            <div class="speedometer w-full h-full relative">
-                                <div class="absolute bottom-0 left-1/2 w-1 h-24 bg-yellow-400" id="needle" style="transform: translateX(-50%) rotate(0deg);"></div>
-                                <div class="absolute bottom-2 left-1/2 w-4 h-4 bg-yellow-400 rounded-full" style="transform: translateX(-50%);"></div>
+                        <div class="flex flex-col items-center mb-8">
+                            <div class="calculator-gauge">
+                                <svg width="300" height="200" viewBox="0 0 300 200">
+                                    <path d="M 50 150 A 100 100 0 0 1 100 63.4" stroke="#10B981" stroke-width="20" fill="none" stroke-linecap="round"></path>
+                                    <path d="M 100 63.4 A 100 100 0 0 1 200 63.4" stroke="#F59E0B" stroke-width="20" fill="none" stroke-linecap="round"></path>
+                                    <path d="M 200 63.4 A 100 100 0 0 1 250 150" stroke="#EF4444" stroke-width="20" fill="none" stroke-linecap="round"></path>
+                                    <g id="gaugeNeedle" class="gauge-needle">
+                                        <line x1="150" y1="150" x2="150" y2="60" stroke="#FACC15" stroke-width="3" stroke-linecap="round"></line>
+                                        <circle cx="150" cy="150" r="8" fill="#FACC15"></circle>
+                                    </g>
+                                    <text x="50" y="170" fill="white" text-anchor="middle" font-size="12">Bajo</text>
+                                    <text x="150" y="50" fill="white" text-anchor="middle" font-size="12">Medio</text>
+                                    <text x="250" y="170" fill="white" text-anchor="middle" font-size="12">Alto</text>
+                                </svg>
                             </div>
                             <div class="text-center mt-4">
                                 <div class="text-yellow-400 text-sm">Tasa de Interés</div>
@@ -796,7 +807,8 @@
             // Update rate display and needle position (based on rate)
             document.getElementById('rateDisplay').textContent = rate + '%';
             const needleRotation = ((rate - 1) / 4) * 180 - 90; // -90 to 90 degrees for semicircle
-            document.getElementById('needle').style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+            const needle = document.getElementById('gaugeNeedle');
+            needle.style.transform = `rotate(${needleRotation}deg)`;
         }
 
         // Mobile menu toggle
