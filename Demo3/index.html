@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVANZAR - Soluciones de Liquidez S.A.S.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .neomorphism {
+            box-shadow: 
+                20px 20px 60px rgba(0, 0, 0, 0.3),
+                -20px -20px 60px rgba(255, 255, 255, 0.05);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFFFFF);
+        }
+        
+        .dark-gradient {
+            background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(255,215,0,0.1)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,215,0,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+        }
+        
+        .hover-float:hover {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-section {
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+        
+        .container-scroll {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .carousel-container {
+            scroll-behavior: smooth;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .calculator-dial {
+            background: conic-gradient(from 0deg, #FFD700, #FFA500, #FF8C00, #FFD700);
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 mx-auto md:mx-0">
+                    <h1 class="text-2xl font-bold gold-gradient bg-clip-text text-transparent">AVANZAR</h1>
+                </div>
+                
+                <!-- Desktop menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
+                    <a href="#nosotros" class="hover:text-yellow-400 transition-colors">Nosotros</a>
+                    <a href="#portafolio" class="hover:text-yellow-400 transition-colors">Portafolio</a>
+                    <a href="#beneficios" class="hover:text-yellow-400 transition-colors">Beneficios</a>
+                    <a href="#educacion" class="hover:text-yellow-400 transition-colors">Educación</a>
+                    <a href="#contacto" class="hover:text-yellow-400 transition-colors">Contacto</a>
+                    <a href="#calculadora" class="bg-yellow-500 text-black px-4 py-2 rounded-full hover:bg-yellow-400 transition-colors">Calculadora</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-64 h-full glass-dark md:hidden z-40">
+            <div class="p-6">
+                <button onclick="toggleMobileMenu()" class="text-white mb-8">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <div class="space-y-4">
+                    <a href="#inicio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Inicio</a>
+                    <a href="#nosotros" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Nosotros</a>
+                    <a href="#portafolio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Portafolio</a>
+                    <a href="#beneficios" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Beneficios</a>
+                    <a href="#educacion" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Educación</a>
+                    <a href="#contacto" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Contacto</a>
+                    <a href="#calculadora" class="block bg-yellow-500 text-black px-4 py-2 rounded-full hover:bg-yellow-400 transition-colors mt-4" onclick="toggleMobileMenu()">Calculadora</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/573001234567" target="_blank" class="whatsapp-float">
+        <div class="bg-green-500 p-4 rounded-full hover-glow">
+            <i class="fab fa-whatsapp text-2xl text-white"></i>
+        </div>
+    </a>
+
+    <div class="container-scroll">
+        <!-- Hero Section -->
+        <section id="inicio" class="scroll-section hero-bg flex items-center justify-center relative">
+            <div class="text-center z-10 max-w-4xl mx-auto px-4">
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                    <span class="gold-gradient bg-clip-text text-transparent">Liquidez</span> rápida,<br>
+                    <span class="text-white">confianza</span> segura
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-300 fade-in">
+                    Soluciones financieras innovadoras para impulsar tu crecimiento
+                </p>
+                <button class="bg-yellow-500 text-black px-8 py-4 rounded-full text-lg font-semibold hover-glow hover-float fade-in">
+                    Solicitar Préstamo
+                </button>
+            </div>
+            
+            <!-- Animated background elements -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-20 left-10 w-32 h-32 bg-yellow-500 rounded-full opacity-10 animate-pulse"></div>
+                <div class="absolute bottom-20 right-10 w-24 h-24 bg-yellow-400 rounded-full opacity-20 animate-bounce"></div>
+            </div>
+        </section>
+
+        <!-- Quiénes Somos Section -->
+        <section id="nosotros" class="scroll-section dark-gradient flex items-center">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="glass neomorphism p-8 rounded-2xl hover-float fade-in">
+                        <h2 class="text-4xl font-bold mb-4 gold-gradient bg-clip-text text-transparent">Nuestra Misión</h2>
+                        <p class="text-gray-300 text-lg">
+                            Brindar soluciones de liquidez rápidas, seguras y transparentes que impulsen el crecimiento de personas y empresas en Colombia.
+                        </p>
+                    </div>
+                    
+                    <div class="glass neomorphism p-8 rounded-2xl hover-float fade-in">
+                        <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Nuestros Valores</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-3"></i>Transparencia total</li>
+                            <li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-3"></i>Rapidez en procesos</li>
+                            <li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-3"></i>Confianza y seguridad</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="glass rounded-2xl p-2 hover-float">
+                        <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl p-8 text-center">
+                            <i class="fas fa-handshake text-6xl text-black mb-4"></i>
+                            <h3 class="text-2xl font-bold text-black">+10,000</h3>
+                            <p class="text-black">Clientes satisfechos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portafolio Section -->
+        <section id="portafolio" class="scroll-section bg-gray-900 flex items-center">
+            <div class="max-w-7xl mx-auto px-4 w-full">
+                <h2 class="text-5xl font-bold text-center mb-12 gold-gradient bg-clip-text text-transparent fade-in">
+                    Nuestro Portafolio
+                </h2>
+                
+                <div class="carousel-container overflow-x-auto pb-4">
+                    <div class="flex space-x-6 w-max">
+                        <div class="glass neomorphism rounded-2xl p-6 w-80 hover-float hover-glow fade-in">
+                            <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                                <i class="fas fa-bolt text-3xl text-black"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-yellow-400">Préstamo Express</h3>
+                            <p class="text-gray-300 mb-4">Liquidez inmediata en menos de 2 horas</p>
+                            <ul class="text-sm text-gray-400 space-y-1 mb-6">
+                                <li>• Desde $500,000 hasta $5,000,000</li>
+                                <li>• Tasa desde 2.5% mensual</li>
+                                <li>• Sin fiador ni codeudor</li>
+                            </ul>
+                            <button class="w-full bg-yellow-500 text-black py-2 rounded-full hover:bg-yellow-400 transition-colors">
+                                Solicitar
+                            </button>
+                        </div>
+                        
+                        <div class="glass neomorphism rounded-2xl p-6 w-80 hover-float hover-glow fade-in">
+                            <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                                <i class="fas fa-building text-3xl text-black"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-yellow-400">Crédito Empresarial</h3>
+                            <p class="text-gray-300 mb-4">Capital de trabajo para tu negocio</p>
+                            <ul class="text-sm text-gray-400 space-y-1 mb-6">
+                                <li>• Desde $2,000,000 hasta $50,000,000</li>
+                                <li>• Tasa desde 2.0% mensual</li>
+                                <li>• Plazos hasta 36 meses</li>
+                            </ul>
+                            <button class="w-full bg-yellow-500 text-black py-2 rounded-full hover:bg-yellow-400 transition-colors">
+                                Solicitar
+                            </button>
+                        </div>
+                        
+                        <div class="glass neomorphism rounded-2xl p-6 w-80 hover-float hover-glow fade-in">
+                            <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                                <i class="fas fa-home text-3xl text-black"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-yellow-400">Préstamo Hipotecario</h3>
+                            <p class="text-gray-300 mb-4">Tu casa como respaldo financiero</p>
+                            <ul class="text-sm text-gray-400 space-y-1 mb-6">
+                                <li>• Hasta el 70% del avalúo</li>
+                                <li>• Tasa desde 1.8% mensual</li>
+                                <li>• Plazos hasta 60 meses</li>
+                            </ul>
+                            <button class="w-full bg-yellow-500 text-black py-2 rounded-full hover:bg-yellow-400 transition-colors">
+                                Solicitar
+                            </button>
+                        </div>
+                        
+                        <div class="glass neomorphism rounded-2xl p-6 w-80 hover-float hover-glow fade-in">
+                            <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                                <i class="fas fa-car text-3xl text-black"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-yellow-400">Préstamo Vehicular</h3>
+                            <p class="text-gray-300 mb-4">Tu vehículo como garantía</p>
+                            <ul class="text-sm text-gray-400 space-y-1 mb-6">
+                                <li>• Hasta el 80% del avalúo</li>
+                                <li>• Tasa desde 2.2% mensual</li>
+                                <li>• Conservas tu vehículo</li>
+                            </ul>
+                            <button class="w-full bg-yellow-500 text-black py-2 rounded-full hover:bg-yellow-400 transition-colors">
+                                Solicitar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beneficios Section -->
+        <section id="beneficios" class="scroll-section dark-gradient flex items-center">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h2 class="text-5xl font-bold mb-16 gold-gradient bg-clip-text text-transparent fade-in">
+                    ¿Por qué elegir AVANZAR?
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="fade-in hover-float">
+                        <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <i class="fas fa-clock text-3xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Rapidez</h3>
+                        <p class="text-gray-300">Aprobación en minutos, desembolso en horas</p>
+                    </div>
+                    
+                    <div class="fade-in hover-float">
+                        <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-3xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Seguridad</h3>
+                        <p class="text-gray-300">Procesos 100% seguros y confidenciales</p>
+                    </div>
+                    
+                    <div class="fade-in hover-float">
+                        <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <i class="fas fa-percentage text-3xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Tasas Competitivas</h3>
+                        <p class="text-gray-300">Las mejores tasas del mercado financiero</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educación Section -->
+        <section id="educacion" class="scroll-section bg-gray-900 flex items-center">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-5xl font-bold text-center mb-12 gold-gradient bg-clip-text text-transparent fade-in">
+                    Educación Financiera
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                        <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                            <i class="fas fa-graduation-cap text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-yellow-400">Manejo del Crédito</h3>
+                        <p class="text-gray-300 mb-4">Aprende a usar el crédito de manera inteligente</p>
+                        <button class="text-yellow-400 hover:text-yellow-300 transition-colors">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                        <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                            <i class="fas fa-chart-line text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-yellow-400">Inversión Personal</h3>
+                        <p class="text-gray-300 mb-4">Estrategias para hacer crecer tu dinero</p>
+                        <button class="text-yellow-400 hover:text-yellow-300 transition-colors">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                        <div class="bg-yellow-500 rounded-xl p-4 mb-4">
+                            <i class="fas fa-piggy-bank text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-yellow-400">Ahorro Inteligente</h3>
+                        <p class="text-gray-300 mb-4">Técnicas efectivas para ahorrar dinero</p>
+                        <button class="text-yellow-400 hover:text-yellow-300 transition-colors">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="scroll-section dark-gradient flex items-center">
+            <div class="max-w-4xl mx-auto px-4 w-full">
+                <h2 class="text-5xl font-bold text-center mb-12 gold-gradient bg-clip-text text-transparent fade-in">
+                    Preguntas Frecuentes
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="glass neomorphism rounded-2xl overflow-hidden fade-in">
+                        <button class="w-full p-6 text-left flex justify-between items-center hover:bg-yellow-500 hover:bg-opacity-10 transition-colors" onclick="toggleFAQ(0)">
+                            <span class="text-lg font-semibold">¿Cuánto tiempo toma la aprobación?</span>
+                            <i class="fas fa-chevron-down transition-transform" id="faq-icon-0"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0 text-gray-300" id="faq-content-0">
+                            La aprobación puede tomar desde 15 minutos hasta 2 horas, dependiendo del tipo de préstamo y la documentación proporcionada.
+                        </div>
+                    </div>
+                    
+                    <div class="glass neomorphism rounded-2xl overflow-hidden fade-in">
+                        <button class="w-full p-6 text-left flex justify-between items-center hover:bg-yellow-500 hover:bg-opacity-10 transition-colors" onclick="toggleFAQ(1)">
+                            <span class="text-lg font-semibold">¿Qué documentos necesito?</span>
+                            <i class="fas fa-chevron-down transition-transform" id="faq-icon-1"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0 text-gray-300" id="faq-content-1">
+                            Cédula de ciudadanía, comprobante de ingresos de los últimos 3 meses, y referencias comerciales y personales.
+                        </div>
+                    </div>
+                    
+                    <div class="glass neomorphism rounded-2xl overflow-hidden fade-in">
+                        <button class="w-full p-6 text-left flex justify-between items-center hover:bg-yellow-500 hover:bg-opacity-10 transition-colors" onclick="toggleFAQ(2)">
+                            <span class="text-lg font-semibold">¿Puedo pagar antes del plazo?</span>
+                            <i class="fas fa-chevron-down transition-transform" id="faq-icon-2"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0 text-gray-300" id="faq-content-2">
+                            Sí, puedes realizar pagos anticipados sin penalización. Esto te ayudará a reducir los intereses totales del préstamo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculadora Section -->
+        <section id="calculadora" class="scroll-section bg-gray-900 flex items-center">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-5xl font-bold mb-12 gold-gradient bg-clip-text text-transparent fade-in">
+                    Calculadora de Préstamos
+                </h2>
+                
+                <div class="glass neomorphism rounded-3xl p-8 max-w-2xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-yellow-400 mb-2 font-semibold">Monto del Préstamo</label>
+                                <input type="range" id="loanAmount" min="500000" max="50000000" step="100000" value="5000000" 
+                                       class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                                       oninput="updateCalculator()">
+                                <div class="text-center mt-2">
+                                    <span class="text-2xl font-bold text-white" id="amountDisplay">$5,000,000</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-yellow-400 mb-2 font-semibold">Plazo (meses)</label>
+                                <input type="range" id="loanTerm" min="6" max="60" step="6" value="12" 
+                                       class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                                       oninput="updateCalculator()">
+                                <div class="text-center mt-2">
+                                    <span class="text-2xl font-bold text-white" id="termDisplay">12 meses</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-yellow-400 mb-2 font-semibold">Tasa de Interés</label>
+                                <select id="interestRate" class="w-full bg-gray-700 text-white p-3 rounded-lg" onchange="updateCalculator()">
+                                    <option value="1.8">1.8% - Hipotecario</option>
+                                    <option value="2.0">2.0% - Empresarial</option>
+                                    <option value="2.2">2.2% - Vehicular</option>
+                                    <option value="2.5" selected>2.5% - Express</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-yellow-500 rounded-2xl p-6 text-black">
+                                <h3 class="text-lg font-bold mb-4">Resumen del Préstamo</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>Cuota Mensual:</span>
+                                        <span class="font-bold" id="monthlyPayment">$458,333</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Total a Pagar:</span>
+                                        <span class="font-bold" id="totalPayment">$5,500,000</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Total Intereses:</span>
+                                        <span class="font-bold" id="totalInterest">$500,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full bg-black text-yellow-400 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
+                                Solicitar Este Préstamo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto Section -->
+        <section id="contacto" class="scroll-section dark-gradient flex items-center">
+            <div class="max-w-4xl mx-auto px-4 w-full">
+                <h2 class="text-5xl font-bold text-center mb-12 gold-gradient bg-clip-text text-transparent fade-in">
+                    Contáctanos
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-yellow-500 rounded-full p-3">
+                                    <i class="fas fa-phone text-black"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-yellow-400">Teléfono</h3>
+                                    <p class="text-gray-300">+57 300 123 4567</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-yellow-500 rounded-full p-3">
+                                    <i class="fas fa-envelope text-black"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-yellow-400">Email</h3>
+                                    <p class="text-gray-300">info@avanzarliquidez.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-yellow-500 rounded-full p-3">
+                                    <i class="fas fa-map-marker-alt text-black"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-yellow-400">Oficina</h3>
+                                    <p class="text-gray-300">Calle 100 #15-20, Bogotá</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass neomorphism rounded-2xl p-8">
+                        <form class="space-y-6">
+                            <div>
+                                <input type="text" placeholder="Nombre completo" 
+                                       class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Correo electrónico" 
+                                       class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <input type="tel" placeholder="Teléfono" 
+                                       class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <textarea placeholder="Mensaje" rows="4" 
+                                          class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold gold-gradient bg-clip-text text-transparent mb-4">AVANZAR</h3>
+                        <p class="text-gray-400 mb-4">Soluciones de liquidez confiables para tu crecimiento financiero.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-yellow-500 hover:text-yellow-400 transition-colors">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="text-yellow-500 hover:text-yellow-400 transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="text-yellow-500 hover:text-yellow-400 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-yellow-400 mb-4">Enlaces Rápidos</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#nosotros" class="hover:text-yellow-400 transition-colors">Nosotros</a></li>
+                            <li><a href="#portafolio" class="hover:text-yellow-400 transition-colors">Portafolio</a></li>
+                            <li><a href="#beneficios" class="hover:text-yellow-400 transition-colors">Beneficios</a></li>
+                            <li><a href="#calculadora" class="hover:text-yellow-400 transition-colors">Calculadora</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-yellow-400 mb-4">Contacto</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>+57 300 123 4567</li>
+                            <li>info@avanzarliquidez.com</li>
+                            <li>Calle 100 #15-20, Bogotá</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 AVANZAR Soluciones de Liquidez S.A.S. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // FAQ toggle
+        function toggleFAQ(index) {
+            const content = document.getElementById(`faq-content-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Calculator functionality
+        function updateCalculator() {
+            const amount = parseInt(document.getElementById('loanAmount').value);
+            const term = parseInt(document.getElementById('loanTerm').value);
+            const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+            
+            // Update displays
+            document.getElementById('amountDisplay').textContent = `$${amount.toLocaleString()}`;
+            document.getElementById('termDisplay').textContent = `${term} meses`;
+            
+            // Calculate payments
+            const monthlyRate = rate;
+            const monthlyPayment = (amount * monthlyRate) + (amount / term);
+            const totalPayment = monthlyPayment * term;
+            const totalInterest = totalPayment - amount;
+            
+            document.getElementById('monthlyPayment').textContent = `$${Math.round(monthlyPayment).toLocaleString()}`;
+            document.getElementById('totalPayment').textContent = `$${Math.round(totalPayment).toLocaleString()}`;
+            document.getElementById('totalInterest').textContent = `$${Math.round(totalInterest).toLocaleString()}`;
+        }
+
+        // Fade in animation on scroll
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', () => {
+            handleScrollAnimations();
+            updateCalculator();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c69f3221484c1a',t:'MTc1NzQyMDIzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
