@@ -87,17 +87,6 @@
             transition: all 0.3s ease;
         }
         
-        .navbar-transparent {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar-solid {
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
         .carousel-slide {
             display: none;
         }
@@ -124,30 +113,46 @@
     </a>
 
     <!-- Navbar -->
-    <nav id="navbar" class="navbar-sticky bg-white shadow-sm">
+    <nav id="navbar" class="navbar-sticky bg-black md:bg-gradient-to-r md:from-black md:via-gray-900 md:to-gray-800 shadow-sm">
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <img src="../assets/img/logo.jpeg" alt="AVANZAR Liquidez" class="h-12 w-auto">
+                    <img src="../assets/img/logo.jpeg" alt="AVANZAR Liquidez" class="h-16 w-auto">
                 </div>
-                
-                <!-- Navigation Menu -->
+
+                <!-- Desktop Navigation Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#inicio" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Inicio</a>
-                    <a href="#quienes-somos" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Nosotros</a>
-                    <a href="#portafolio" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Productos</a>
-                    <a href="#beneficios" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Beneficios</a>
-                    <a href="#faq" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">FAQ</a>
-                    <a href="#contacto" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Contacto</a>
+                    <a href="#inicio" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Inicio</a>
+                    <a href="#quienes-somos" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Nosotros</a>
+                    <a href="#portafolio" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Productos</a>
+                    <a href="#beneficios" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Beneficios</a>
+                    <a href="#faq" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">FAQ</a>
+                    <a href="#contacto" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Contacto</a>
                 </div>
-                
-                <!-- CTA Button -->
+
+                <!-- CTA Button (desktop) and Mobile Menu Toggle -->
                 <div class="flex items-center">
-                    <a href="#calculadora" class="bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium text-sm hover:bg-yellow-700 transition-colors">
+                    <a href="#calculadora" class="hidden md:inline-block bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium text-sm hover:bg-yellow-700 transition-colors">
                         Calcular Préstamo
                     </a>
+                    <button id="menu-toggle" class="md:hidden text-white focus:outline-none ml-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden flex-col space-y-4 pb-4 md:hidden">
+                <a href="#inicio" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Inicio</a>
+                <a href="#quienes-somos" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Nosotros</a>
+                <a href="#portafolio" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Productos</a>
+                <a href="#beneficios" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Beneficios</a>
+                <a href="#faq" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">FAQ</a>
+                <a href="#contacto" class="text-white hover:text-yellow-400 transition-colors font-medium text-sm">Contacto</a>
+                <a href="#calculadora" class="bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium text-sm hover:bg-yellow-700 transition-colors text-center">Calcular Préstamo</a>
             </div>
         </div>
     </nav>
@@ -794,16 +799,11 @@
             document.getElementById('needle').style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
         }
 
-        // Navbar transparency on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('navbar-transparent');
-                navbar.classList.remove('bg-white');
-            } else {
-                navbar.classList.remove('navbar-transparent');
-                navbar.classList.add('bg-white');
-            }
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
         // Smooth scrolling for navigation links
