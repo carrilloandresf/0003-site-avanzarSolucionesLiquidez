@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVANZAR - Soluciones de Liquidez S.A.S.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glassmorphism-strong {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .glassmorphism-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glassmorphism-gold {
+            background: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #fff8e1 100%);
+        }
+        
+        .speedometer {
+            background: conic-gradient(from 180deg, #10b981 0deg 60deg, #f59e0b 60deg 120deg, #dc2626 120deg 180deg);
+            border-radius: 200px 200px 0 0;
+            position: relative;
+        }
+        
+        .speedometer::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 40px;
+            background: #000;
+            border-radius: 0 0 100px 100px;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+        .navbar-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-transparent {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-solid {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-slide {
+            display: none;
+        }
+        
+        .carousel-slide.active {
+            display: block;
+        }
+        
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-content.active {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank">
+        <span>💬</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar-sticky bg-white shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-black font-serif text-2xl font-bold">
+                        AVANZAR
+                        <span class="text-yellow-600 text-sm font-normal ml-2">Liquidez</span>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Inicio</a>
+                    <a href="#quienes-somos" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Nosotros</a>
+                    <a href="#portafolio" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Productos</a>
+                    <a href="#beneficios" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Beneficios</a>
+                    <a href="#faq" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">FAQ</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-yellow-600 transition-colors font-medium text-sm">Contacto</a>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <a href="#calculadora" class="bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium text-sm hover:bg-yellow-700 transition-colors">
+                        Calcular Préstamo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="bg-gradient-to-br from-gray-50 to-white min-h-screen flex items-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="carousel relative">
+                <div class="carousel-slide active">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <div class="inline-block bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                                ✨ Aprobación en minutos
+                            </div>
+                            <h1 class="font-serif text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                                Préstamos que se adaptan a tu 
+                                <span class="text-yellow-600">ritmo de vida</span>
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                                Obtén la liquidez que necesitas con procesos 100% digitales, tasas transparentes y sin complicaciones.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button class="bg-yellow-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-yellow-700 transition-colors">
+                                    Solicitar Préstamo
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-colors">
+                                    Ver Calculadora
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="relative">
+                                <div class="w-80 h-80 glassmorphism-strong bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                                    <div class="text-white text-center">
+                                        <div class="text-6xl mb-4">💰</div>
+                                        <div class="text-2xl font-bold">+10,000</div>
+                                        <div class="text-lg opacity-90">Clientes Satisfechos</div>
+                                    </div>
+                                </div>
+                                <div class="absolute -top-4 -right-4 w-20 h-20 glassmorphism rounded-2xl shadow-lg flex items-center justify-center">
+                                    <span class="text-2xl">⚡</span>
+                                </div>
+                                <div class="absolute -bottom-4 -left-4 w-20 h-20 glassmorphism rounded-2xl shadow-lg flex items-center justify-center">
+                                    <span class="text-2xl">🔒</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <div class="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                                🚀 Soluciones integrales
+                            </div>
+                            <h1 class="font-serif text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                                Más que préstamos,
+                                <span class="text-yellow-600">crecimiento</span>
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                                Descubre nuestro portafolio completo de productos financieros diseñados para impulsar tu negocio.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button class="bg-yellow-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-yellow-700 transition-colors">
+                                    Ver Productos
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-colors">
+                                    Hablar con Asesor
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="relative">
+                                <div class="w-80 h-80 glassmorphism-strong bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                                    <div class="text-white text-center">
+                                        <div class="text-6xl mb-4">📈</div>
+                                        <div class="text-2xl font-bold">Crecimiento</div>
+                                        <div class="text-lg opacity-90">Garantizado</div>
+                                    </div>
+                                </div>
+                                <div class="absolute -top-4 -right-4 w-20 h-20 glassmorphism rounded-2xl shadow-lg flex items-center justify-center">
+                                    <span class="text-2xl">💼</span>
+                                </div>
+                                <div class="absolute -bottom-4 -left-4 w-20 h-20 glassmorphism rounded-2xl shadow-lg flex items-center justify-center">
+                                    <span class="text-2xl">📊</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Carousel Controls -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+            <button onclick="changeSlide(0)" class="w-2 h-2 rounded-full bg-yellow-600 carousel-dot active transition-all"></button>
+            <button onclick="changeSlide(1)" class="w-2 h-2 rounded-full bg-gray-300 carousel-dot transition-all"></button>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="quienes-somos" class="py-24 bg-gradient-to-br from-blue-50 to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">Por qué elegir AVANZAR</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Somos más que una financiera, somos tu aliado estratégico para el crecimiento</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glassmorphism-strong p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">🤝</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Confianza</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Más de 10 años construyendo relaciones sólidas basadas en transparencia y honestidad.
+                    </p>
+                </div>
+                
+                <div class="glassmorphism-strong p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Rapidez</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Procesos 100% digitales que te permiten obtener tu préstamo en minutos, no días.
+                    </p>
+                </div>
+                
+                <div class="glassmorphism-strong p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl">🔍</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Transparencia</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Información clara sobre tasas y condiciones. Sin letra pequeña ni sorpresas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portafolio -->
+    <section id="portafolio" class="py-24 bg-gradient-to-br from-white to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nuestros Productos</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Soluciones financieras diseñadas para cada etapa de tu crecimiento</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group glassmorphism border border-gray-200 rounded-2xl p-8 hover:border-yellow-300 hover:shadow-lg transition-all">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-200 transition-colors">
+                        <span class="text-xl">🚀</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Préstamos Express</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+                        Liquidez inmediata con aprobación en minutos y desembolso el mismo día.
+                    </p>
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-3"></span>
+                            Hasta $5,000,000
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-3"></span>
+                            Plazos de 1 a 24 meses
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-3"></span>
+                            Tasas desde 2.5%
+                        </div>
+                    </div>
+                    <button class="w-full bg-yellow-600 text-white py-3 rounded-xl font-medium hover:bg-yellow-700 transition-colors">
+                        Solicitar
+                    </button>
+                </div>
+                
+                <div class="group glassmorphism border border-gray-200 rounded-2xl p-8 hover:border-blue-300 hover:shadow-lg transition-all">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
+                        <span class="text-xl">💼</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Microcréditos</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+                        Soluciones para pequeñas necesidades de capital de trabajo o gastos imprevistos.
+                    </p>
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></span>
+                            Desde $100,000
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></span>
+                            Sin garantías
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></span>
+                            100% digital
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                        Más Info
+                    </button>
+                </div>
+                
+                <div class="group glassmorphism border border-gray-200 rounded-2xl p-8 hover:border-purple-300 hover:shadow-lg transition-all">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors">
+                        <span class="text-xl">🏦</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Líneas de Crédito</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+                        Acceso continuo a capital con líneas de crédito flexibles y renovables.
+                    </p>
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span>
+                            Líneas renovables
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span>
+                            Uso cuando necesites
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span>
+                            Asesoría incluida
+                        </div>
+                    </div>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-xl font-medium hover:bg-purple-700 transition-colors">
+                        Consultar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section id="beneficios" class="py-24 bg-gradient-to-br from-green-50 to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">La experiencia AVANZAR</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Cada detalle pensado para hacer tu experiencia financiera excepcional</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl">👥</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Atención Personal</h3>
+                    <p class="text-gray-600 text-sm">Asesoría especializada en cada paso del proceso</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl">💎</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Costos Claros</h3>
+                    <p class="text-gray-600 text-sm">Sin sorpresas ni costos ocultos en tu préstamo</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl">⏰</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Respuesta Rápida</h3>
+                    <p class="text-gray-600 text-sm">Aprobación en minutos, no en días</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl">🛡️</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Soporte 24/7</h3>
+                    <p class="text-gray-600 text-sm">Estamos contigo cuando nos necesites</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-gradient-to-br from-purple-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">Preguntas Frecuentes</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Resolvemos las dudas más comunes sobre nuestros productos</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFAQ(0)" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <span class="font-medium text-gray-900">¿Cuáles son los requisitos para solicitar un préstamo?</span>
+                        <span class="text-gray-400 text-xl faq-arrow">+</span>
+                    </button>
+                    <div class="faq-content px-6 pb-6">
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <p class="text-gray-600 text-sm leading-relaxed">Necesitas ser mayor de edad, tener ingresos demostrables, cédula de ciudadanía y referencias comerciales. El proceso es sencillo y te acompañamos en cada paso.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFAQ(1)" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <span class="font-medium text-gray-900">¿Cuánto tiempo tarda la aprobación?</span>
+                        <span class="text-gray-400 text-xl faq-arrow">+</span>
+                    </button>
+                    <div class="faq-content px-6 pb-6">
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <p class="text-gray-600 text-sm leading-relaxed">Nuestros préstamos express se aprueban en minutos. Una vez aprobado, el desembolso se realiza el mismo día hábil.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFAQ(2)" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <span class="font-medium text-gray-900">¿Qué tasas de interés manejan?</span>
+                        <span class="text-gray-400 text-xl faq-arrow">+</span>
+                    </button>
+                    <div class="faq-content px-6 pb-6">
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <p class="text-gray-600 text-sm leading-relaxed">Nuestras tasas son competitivas y varían según el monto, plazo y perfil crediticio. Te proporcionamos una cotización personalizada sin compromiso.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFAQ(3)" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                        <span class="font-medium text-gray-900">¿Puedo hacer pagos anticipados?</span>
+                        <span class="text-gray-400 text-xl faq-arrow">+</span>
+                    </button>
+                    <div class="faq-content px-6 pb-6">
+                        <div class="bg-gray-50 p-4 rounded-xl">
+                            <p class="text-gray-600 text-sm leading-relaxed">Sí, puedes realizar abonos a capital o pagar completamente tu préstamo antes del vencimiento sin penalizaciones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog" class="py-20 bg-gradient-to-br from-yellow-50 to-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-5xl font-bold text-center text-black mb-16">Educación Financiera</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="font-serif text-xl font-bold text-black mb-3">Cómo Calcular la Tasa Efectiva</h3>
+                        <p class="text-gray-600 mb-4">Aprende a entender realmente cuánto pagas por tu préstamo y compara diferentes opciones de manera efectiva.</p>
+                        <a href="#" class="text-yellow-600 font-semibold hover:text-yellow-700">Leer más →</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="text-4xl mb-4">⚡</div>
+                        <h3 class="font-serif text-xl font-bold text-black mb-3">Crédito Rápido vs Tradicional</h3>
+                        <p class="text-gray-600 mb-4">Conoce las diferencias, ventajas y cuándo es conveniente cada tipo de financiación para tu situación.</p>
+                        <a href="#" class="text-yellow-600 font-semibold hover:text-yellow-700">Leer más →</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="text-4xl mb-4">💡</div>
+                        <h3 class="font-serif text-xl font-bold text-black mb-3">Tips para Mejorar tu Score</h3>
+                        <p class="text-gray-600 mb-4">Estrategias prácticas para mejorar tu historial crediticio y acceder a mejores condiciones financieras.</p>
+                        <a href="#" class="text-yellow-600 font-semibold hover:text-yellow-700">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-5xl font-bold text-black mb-4">Contáctanos</h2>
+                <div class="w-24 h-1 gold-gradient mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="glassmorphism-strong p-8 rounded-3xl">
+                    <h3 class="font-serif text-2xl font-bold text-black mb-8">Envíanos un Mensaje</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-3">Nombre Completo</label>
+                            <input type="text" class="w-full px-6 py-4 glassmorphism rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent border-0 placeholder-gray-500" placeholder="Tu nombre completo">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-3">Teléfono</label>
+                            <input type="tel" class="w-full px-6 py-4 glassmorphism rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent border-0 placeholder-gray-500" placeholder="Tu número de teléfono">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-3">Correo Electrónico</label>
+                            <input type="email" class="w-full px-6 py-4 glassmorphism rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent border-0 placeholder-gray-500" placeholder="tu@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-3">Mensaje</label>
+                            <textarea rows="4" class="w-full px-6 py-4 glassmorphism rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent border-0 placeholder-gray-500" placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full gold-gradient text-black py-4 rounded-xl font-semibold hover:shadow-xl transition-all transform hover:scale-105 text-lg">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-black mb-6">Información de Contacto</h3>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center">
+                            <span class="text-yellow-600 text-xl mr-4">📍</span>
+                            <span class="text-gray-700">Calle 123 #45-67, Bogotá, Colombia</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-yellow-600 text-xl mr-4">📞</span>
+                            <span class="text-gray-700">+57 (1) 234-5678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-yellow-600 text-xl mr-4">✉️</span>
+                            <span class="text-gray-700">info@avanzarliquidez.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-yellow-600 text-xl mr-4">🕒</span>
+                            <span class="text-gray-700">Lun - Vie: 8:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="glassmorphism rounded-xl p-6">
+                        <h4 class="font-semibold text-black mb-4">Ubicación</h4>
+                        <div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center">
+                            <span class="text-gray-500">🗺️ Mapa Interactivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadora -->
+    <section id="calculadora" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-5xl font-bold text-center text-yellow-400 mb-16">Calculadora de Préstamos</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="glassmorphism-dark rounded-2xl p-8">
+                        <h3 class="font-serif text-2xl font-bold text-yellow-400 mb-6">Simula tu Préstamo</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-yellow-300 font-medium mb-2">Monto del Préstamo</label>
+                                <input type="range" id="amount" min="100000" max="10000000" value="1000000" class="w-full" oninput="updateCalculator()">
+                                <div class="flex justify-between text-yellow-200 text-sm mt-1">
+                                    <span>$100K</span>
+                                    <span id="amountValue">$1,000,000</span>
+                                    <span>$10M</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-yellow-300 font-medium mb-2">Plazo (meses)</label>
+                                <input type="range" id="term" min="1" max="60" value="12" class="w-full" oninput="updateCalculator()">
+                                <div class="flex justify-between text-yellow-200 text-sm mt-1">
+                                    <span>1 mes</span>
+                                    <span id="termValue">12 meses</span>
+                                    <span>60 meses</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-yellow-300 font-medium mb-2">Tasa de Interés (%)</label>
+                                <input type="range" id="rate" min="1" max="5" value="2.5" step="0.1" class="w-full" oninput="updateCalculator()">
+                                <div class="flex justify-between text-yellow-200 text-sm mt-1">
+                                    <span>1%</span>
+                                    <span id="rateValue">2.5%</span>
+                                    <span>5%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glassmorphism-dark rounded-2xl p-8">
+                        <h3 class="font-serif text-2xl font-bold text-yellow-400 mb-6">Resultados</h3>
+                        
+                        <div class="relative w-64 h-32 mx-auto mb-8">
+                            <div class="speedometer w-full h-full relative">
+                                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-24 bg-yellow-400 origin-bottom" id="needle" style="transform: translateX(-50%) rotate(0deg); transform-origin: bottom center;"></div>
+                                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <div class="text-yellow-400 text-sm">Tasa de Interés</div>
+                                <div class="text-yellow-300 text-xl font-bold" id="rateDisplay">2.5%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-black bg-opacity-50 rounded-lg">
+                                <span class="text-yellow-300">Total a Pagar:</span>
+                                <span class="text-yellow-400 font-bold" id="totalPayment">$1,050,000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-black bg-opacity-50 rounded-lg">
+                                <span class="text-yellow-300">Intereses:</span>
+                                <span class="text-yellow-400 font-bold" id="totalInterest">$50,000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-black bg-opacity-50 rounded-lg">
+                                <span class="text-yellow-300">Papelería:</span>
+                                <span class="text-yellow-400 font-bold">$25,000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-black bg-opacity-50 rounded-lg">
+                                <span class="text-yellow-300">Otros Cargos:</span>
+                                <span class="text-yellow-400 font-bold">$15,000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full gold-gradient text-black py-3 rounded-lg font-semibold mt-6 hover:shadow-lg transition-all">
+                            Solicitar Este Préstamo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-yellow-400 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-serif text-2xl font-bold mb-4">AVANZAR</h3>
+                    <p class="text-yellow-300 mb-4">Soluciones de Liquidez S.A.S.</p>
+                    <p class="text-yellow-200 text-sm">Tu aliado financiero de confianza para alcanzar tus metas.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Productos</h4>
+                    <ul class="space-y-2 text-yellow-200">
+                        <li><a href="#" class="hover:text-yellow-400">Préstamos Rápidos</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Préstamos Pequeños</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Líneas de Crédito</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Factoring</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Empresa</h4>
+                    <ul class="space-y-2 text-yellow-200">
+                        <li><a href="#" class="hover:text-yellow-400">Quiénes Somos</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Blog</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Trabaja con Nosotros</a></li>
+                        <li><a href="#" class="hover:text-yellow-400">Políticas de Privacidad</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-2xl hover:text-yellow-300">📘</a>
+                        <a href="#" class="text-2xl hover:text-yellow-300">📷</a>
+                        <a href="#" class="text-2xl hover:text-yellow-300">🐦</a>
+                        <a href="#" class="text-2xl hover:text-yellow-300">💼</a>
+                    </div>
+                    <p class="text-yellow-200 text-sm">📞 +57 (1) 234-5678</p>
+                    <p class="text-yellow-200 text-sm">✉️ info@avanzarliquidez.com</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-yellow-800 mt-8 pt-8 text-center">
+                <p class="text-yellow-200 text-sm">© 2024 AVANZAR Soluciones de Liquidez S.A.S. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function changeSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.add('bg-gray-400');
+            dots[currentSlide].classList.remove('bg-yellow-600');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+            dots[currentSlide].classList.remove('bg-gray-400');
+            dots[currentSlide].classList.add('bg-yellow-600');
+        }
+
+        // Auto-advance carousel
+        setInterval(() => {
+            changeSlide((currentSlide + 1) % slides.length);
+        }, 5000);
+
+        // FAQ functionality
+        function toggleFAQ(index) {
+            const content = document.querySelectorAll('.faq-content')[index];
+            const arrow = document.querySelectorAll('.faq-arrow')[index];
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.textContent = '+';
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.faq-arrow').forEach(a => a.textContent = '+');
+                
+                content.classList.add('active');
+                arrow.textContent = '−';
+            }
+        }
+
+        // Calculator functionality
+        function updateCalculator() {
+            const amount = parseInt(document.getElementById('amount').value);
+            const term = parseInt(document.getElementById('term').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            
+            // Update display values
+            document.getElementById('amountValue').textContent = '$' + amount.toLocaleString();
+            document.getElementById('termValue').textContent = term + ' meses';
+            document.getElementById('rateValue').textContent = rate + '%';
+            
+            // Calculate monthly payment
+            const monthlyRate = rate / 100;
+            const monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term));
+            const totalPayment = monthlyPayment * term;
+            const totalInterest = totalPayment - amount;
+            
+            // Update results
+            document.getElementById('totalPayment').textContent = '$' + Math.round(totalPayment + 40000).toLocaleString(); // Adding fixed costs
+            document.getElementById('totalInterest').textContent = '$' + Math.round(totalInterest).toLocaleString();
+            
+            // Update rate display and needle position (based on rate)
+            document.getElementById('rateDisplay').textContent = rate + '%';
+            const needleRotation = ((rate - 1) / 4) * 180 - 90; // -90 to 90 degrees for semicircle
+            document.getElementById('needle').style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+        }
+
+        // Navbar transparency on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-transparent');
+                navbar.classList.remove('bg-white');
+            } else {
+                navbar.classList.remove('navbar-transparent');
+                navbar.classList.add('bg-white');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize calculator
+        updateCalculator();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c35cbf671602f1',t:'MTc1NzM4NjA2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
