@@ -17,7 +17,7 @@ body {
 }
 
 .logo {
-  width: 260px;
+  width: 350px;
   margin-bottom: 1.5rem;
   border-radius: 8px;
 }
@@ -28,7 +28,7 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
   text-transform: uppercase;
