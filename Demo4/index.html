@@ -103,12 +103,23 @@
             transform: translateX(0);
         }
 
+        .distort-on-menu {
+            transition: filter 0.45s ease, transform 0.45s ease;
+            will-change: filter, transform;
+            transform-origin: center;
+        }
+
+        body.mobile-menu-open .distort-on-menu {
+            filter: blur(28px) saturate(190%) brightness(0.65);
+            transform: scale(1.05);
+        }
+
         .mobile-menu-backdrop {
             position: fixed;
             inset: 0;
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
-            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(45px) saturate(220%) contrast(0.75);
+            -webkit-backdrop-filter: blur(45px) saturate(220%) contrast(0.75);
+            background: rgba(8, 11, 19, 0.65);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -211,16 +222,28 @@
         }
 
         .mobile-menu-panel {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(30, 41, 59, 0.72));
-            backdrop-filter: blur(18px);
-            border-right: 1px solid rgba(148, 163, 184, 0.25);
-            box-shadow: 12px 0 40px rgba(15, 23, 42, 0.35);
+            background: linear-gradient(160deg, rgba(9, 11, 19, 0.92), rgba(17, 24, 39, 0.76));
+            backdrop-filter: blur(28px) saturate(180%);
+            border-right: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 25px 60px rgba(8, 11, 19, 0.55);
+            isolation: isolate;
+        }
+
+        .mobile-menu-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-right: 1px solid rgba(212, 175, 55, 0.12);
+            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.12), transparent 55%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .mobile-menu-panel a {
             padding: 0.75rem 1rem;
             border-radius: 12px;
             transition: background 0.3s ease, color 0.3s ease;
+            color: rgba(248, 250, 252, 0.92);
         }
 
         .mobile-menu-panel a:hover {
@@ -365,7 +388,7 @@
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-95 backdrop-blur-sm shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 distort-on-menu">
             <div class="flex justify-between items-center h-16 text-white">
                 <button class="md:hidden text-white mobile-menu-toggle" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-xl"></i>
@@ -402,7 +425,7 @@
         </div>
     </nav>
 
-    <div class="container-scroll">
+    <div class="container-scroll distort-on-menu">
         <!-- Hero Section -->
         <section id="inicio" class="scroll-section hero-bg relative">
             <div class="w-full">
@@ -962,6 +985,7 @@
             }
 
             document.body.classList.toggle('overflow-hidden', isOpen);
+            document.body.classList.toggle('mobile-menu-open', isOpen);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
