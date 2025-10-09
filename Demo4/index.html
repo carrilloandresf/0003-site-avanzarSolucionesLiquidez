@@ -103,6 +103,23 @@
             transform: translateX(0);
         }
 
+        .mobile-menu-backdrop {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            background: rgba(15, 23, 42, 0.65);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 39;
+        }
+
+        .mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .whatsapp-float {
             position: fixed;
             bottom: 24px;
@@ -370,6 +387,7 @@
             </div>
         </div>
 
+        <div id="mobileMenuBackdrop" class="mobile-menu-backdrop md:hidden"></div>
         <div id="mobileMenu" class="mobile-menu mobile-menu-panel fixed top-0 left-0 w-64 h-full md:hidden z-40 p-6 space-y-4 text-white">
             <button onclick="toggleMobileMenu()" class="text-white mb-6 mobile-menu-close">
                 <i class="fas fa-times text-xl"></i>
@@ -930,8 +948,28 @@
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
+            const backdrop = document.getElementById('mobileMenuBackdrop');
+
+            if (!menu) {
+                return;
+            }
+
             menu.classList.toggle('open');
+            const isOpen = menu.classList.contains('open');
+
+            if (backdrop) {
+                backdrop.classList.toggle('open', isOpen);
+            }
+
+            document.body.classList.toggle('overflow-hidden', isOpen);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const backdrop = document.getElementById('mobileMenuBackdrop');
+            if (backdrop) {
+                backdrop.addEventListener('click', toggleMobileMenu);
+            }
+        });
 
         function toggleFAQ(id) {
             const content = document.getElementById(id);
