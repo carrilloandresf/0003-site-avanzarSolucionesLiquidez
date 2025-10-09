@@ -144,28 +144,54 @@
         .whatsapp-tooltip {
             position: absolute;
             right: 0;
-            bottom: calc(100% + 12px);
-            transform: translateY(10px) scale(0.9);
-            background: #ffffff;
-            color: #1f2937;
-            padding: 10px 18px;
-            border-radius: 999px;
+            bottom: calc(100% + 16px);
+            transform: translateY(12px) scale(0.92);
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            color: #0f172a;
+            padding: 12px 20px;
+            border-radius: 20px 20px 8px 20px;
             font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+            font-size: 0.95rem;
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            letter-spacing: 0.01em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             opacity: 0;
             pointer-events: none;
             animation: tooltipWave 8s infinite;
+            z-index: 1;
+        }
+
+        .whatsapp-tooltip i {
+            color: #22c55e;
+            font-size: 1rem;
+        }
+
+        .whatsapp-tooltip::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 20px 20px 8px 20px;
+            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 55%);
+            pointer-events: none;
         }
 
         .whatsapp-tooltip::after {
             content: "";
             position: absolute;
-            right: 20px;
-            bottom: -10px;
-            border-width: 10px 10px 0 10px;
-            border-style: solid;
-            border-color: #ffffff transparent transparent transparent;
+            right: 26px;
+            bottom: -12px;
+            width: 20px;
+            height: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-left: none;
+            border-top: none;
+            transform: rotate(45deg);
+            border-bottom-left-radius: 6px;
+            box-shadow: 8px 12px 16px rgba(15, 23, 42, 0.12);
         }
 
         @keyframes pulse {
@@ -225,8 +251,38 @@
             background: rgba(212, 175, 55, 0.15);
         }
 
+        .light-section {
+            background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+        }
+
         .bg-gray-900 {
-            background-color: #F3F4F6 !important;
+            background-color: #050607 !important;
+        }
+
+        .calculator-section {
+            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.14), transparent 65%), #050607;
+        }
+
+        .calculator-section .glass {
+            background: rgba(15, 23, 42, 0.72);
+            border-color: rgba(212, 175, 55, 0.28);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        .calculator-section .text-gray-300 {
+            color: #e5e7eb !important;
+        }
+
+        .calculator-section .text-gray-400 {
+            color: rgba(226, 232, 240, 0.75) !important;
+        }
+
+        .calculator-section .text-yellow-200 {
+            color: #fde68a !important;
+        }
+
+        .calculator-section .text-yellow-300 {
+            color: #fcd34d !important;
         }
 
         .text-gray-300 {
@@ -259,7 +315,7 @@
         <div class="whatsapp-button hover-glow">
             <i class="fab fa-whatsapp"></i>
         </div>
-        <div class="whatsapp-tooltip">Habla con nosotros</div>
+        <div class="whatsapp-tooltip"><i class="fas fa-comment-alt"></i><span>Habla con nosotros</span></div>
     </a>
 
     <!-- Navbar -->
@@ -275,7 +331,7 @@
                     <span class="text-xl font-semibold gold-gradient bg-clip-text text-transparent">AVANZAR</span>
                 </div>
 
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-white">
                     <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
                     <a href="#quienes-somos" class="hover:text-yellow-400 transition-colors">Nosotros</a>
                     <a href="#portafolio" class="hover:text-yellow-400 transition-colors">Portafolio</a>
@@ -335,7 +391,7 @@
         </section>
 
         <!-- Quiénes Somos -->
-        <section id="quienes-somos" class="scroll-section bg-gray-900">
+        <section id="quienes-somos" class="scroll-section light-section">
             <div class="w-full">
                 <div class="max-w-6xl mx-auto px-4">
                     <h2 class="text-4xl md:text-5xl font-serif font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Quiénes Somos</h2>
@@ -533,7 +589,7 @@
         </section>
 
         <!-- Educación Financiera -->
-        <section id="educacion" class="scroll-section bg-gray-900">
+        <section id="educacion" class="scroll-section light-section">
             <div class="w-full">
                 <div class="max-w-7xl mx-auto px-4">
                     <h2 class="text-5xl font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Educación Financiera</h2>
@@ -636,30 +692,23 @@
             <div class="w-full">
                 <div class="max-w-6xl mx-auto px-4">
                     <h2 class="text-5xl font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Contáctanos</h2>
-                    <div class="grid md:grid-cols-2 gap-12">
-                        <div class="glass neomorphism rounded-3xl p-8 space-y-6 fade-in">
-                            <h3 class="text-2xl font-bold text-yellow-300">Envíanos un mensaje</h3>
-                            <form class="space-y-6">
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <input type="text" placeholder="Nombre completo" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
-                                    <input type="email" placeholder="Correo electrónico" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
+                    <div class="max-w-4xl mx-auto space-y-10 fade-in">
+                        <div class="glass neomorphism rounded-3xl p-8 space-y-4 text-left">
+                            <h3 class="text-2xl font-bold text-yellow-300">Asesoría personalizada a un mensaje de distancia</h3>
+                            <p class="text-gray-300">Nuestro equipo financiero está disponible para guiarte por el proceso de tu préstamo y resolver cualquier inquietud en tiempo récord. Elige el canal que prefieras y nos pondremos en contacto contigo.</p>
+                            <div class="flex flex-wrap gap-6 text-sm text-gray-400">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-clock text-yellow-300"></i>
+                                    <span>Tiempo de respuesta promedio: 15 minutos</span>
                                 </div>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <input type="tel" placeholder="Teléfono" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
-                                    <select class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
-                                        <option value="">Tipo de consulta</option>
-                                        <option value="prestamo">Solicitar préstamo</option>
-                                        <option value="informacion">Información general</option>
-                                        <option value="soporte">Soporte técnico</option>
-                                        <option value="reclamo">Reclamo o sugerencia</option>
-                                    </select>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-user-tie text-yellow-300"></i>
+                                    <span>Atención especializada y confidencial</span>
                                 </div>
-                                <textarea rows="4" placeholder="Cuéntanos cómo podemos ayudarte" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200"></textarea>
-                                <button type="submit" class="w-full py-3 font-semibold btn-black">Enviar mensaje</button>
-                            </form>
+                            </div>
                         </div>
-                        <div class="space-y-8 fade-in">
-                            <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-black p-3 rounded-full text-yellow-300">
                                         <i class="fas fa-phone"></i>
@@ -671,7 +720,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-black p-3 rounded-full text-yellow-300">
                                         <i class="fab fa-whatsapp"></i>
@@ -683,7 +732,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-black p-3 rounded-full text-yellow-300">
                                         <i class="fas fa-envelope"></i>
@@ -695,7 +744,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="glass neomorphism rounded-2xl p-6 hover-float">
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-black p-3 rounded-full text-yellow-300">
                                         <i class="fas fa-map-marker-alt"></i>
@@ -714,7 +763,7 @@
         </section>
 
         <!-- Calculadora -->
-        <section id="calculadora" class="scroll-section bg-gray-900">
+        <section id="calculadora" class="scroll-section bg-gray-900 calculator-section">
             <div class="w-full">
                 <div class="max-w-5xl mx-auto px-4 text-center">
                     <h2 class="text-5xl font-bold mb-12 gold-gradient bg-clip-text text-transparent fade-in">Calculadora de Préstamos</h2>
@@ -750,6 +799,24 @@
                                 </div>
                             </div>
                             <div class="space-y-8 fade-in">
+                                <div class="glass neomorphism rounded-2xl p-6">
+                                    <h4 class="text-lg font-semibold text-yellow-300 mb-4">Nivel de tu cuota</h4>
+                                    <div class="calculator-gauge">
+                                        <svg width="300" height="200" viewBox="0 0 300 200">
+                                            <path d="M 50 150 A 100 100 0 0 1 100 63.4" stroke="#EF4444" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <path d="M 100 63.4 A 100 100 0 0 1 200 63.4" stroke="#F59E0B" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <path d="M 200 63.4 A 100 100 0 0 1 250 150" stroke="#10B981" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <g id="gaugeNeedle" class="gauge-needle">
+                                                <line x1="150" y1="150" x2="150" y2="60" stroke="#FFD700" stroke-width="4" stroke-linecap="round"></line>
+                                                <circle cx="150" cy="150" r="8" fill="#FFD700"></circle>
+                                            </g>
+                                            <text x="50" y="170" fill="#fecaca" text-anchor="middle" font-size="12">Alto</text>
+                                            <text x="150" y="50" fill="#fef3c7" text-anchor="middle" font-size="12">Moderado</text>
+                                            <text x="250" y="170" fill="#bbf7d0" text-anchor="middle" font-size="12">Saludable</text>
+                                        </svg>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mt-4">El velocímetro compara tu cuota mensual frente al monto solicitado y resalta el nivel de esfuerzo financiero: rojo (alto), amarillo (moderado) y verde (saludable).</p>
+                                </div>
                                 <div class="bg-black bg-opacity-60 rounded-2xl p-6 text-left">
                                     <h3 class="text-lg font-bold text-yellow-300 mb-4">Resumen del préstamo</h3>
                                     <div class="space-y-3">
@@ -770,24 +837,6 @@
                                             <span class="font-semibold text-yellow-200" id="paperworkCost">$0</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="glass neomorphism rounded-2xl p-6">
-                                    <h4 class="text-lg font-semibold text-yellow-300 mb-4">Nivel de tu cuota</h4>
-                                    <div class="calculator-gauge">
-                                        <svg width="300" height="200" viewBox="0 0 300 200">
-                                            <path d="M 50 150 A 100 100 0 0 1 100 63.4" stroke="#10B981" stroke-width="18" fill="none" stroke-linecap="round"></path>
-                                            <path d="M 100 63.4 A 100 100 0 0 1 200 63.4" stroke="#F59E0B" stroke-width="18" fill="none" stroke-linecap="round"></path>
-                                            <path d="M 200 63.4 A 100 100 0 0 1 250 150" stroke="#EF4444" stroke-width="18" fill="none" stroke-linecap="round"></path>
-                                            <g id="gaugeNeedle" class="gauge-needle">
-                                                <line x1="150" y1="150" x2="150" y2="60" stroke="#FFD700" stroke-width="4" stroke-linecap="round"></line>
-                                                <circle cx="150" cy="150" r="8" fill="#FFD700"></circle>
-                                            </g>
-                                            <text x="50" y="170" fill="#d1fae5" text-anchor="middle" font-size="12">Bajo</text>
-                                            <text x="150" y="50" fill="#fef3c7" text-anchor="middle" font-size="12">Medio</text>
-                                            <text x="250" y="170" fill="#fee2e2" text-anchor="middle" font-size="12">Alto</text>
-                                        </svg>
-                                    </div>
-                                    <p class="text-sm text-gray-300 mt-4">El velocímetro compara tu cuota mensual frente al monto solicitado para ayudarte a visualizar la carga financiera de tu crédito.</p>
                                 </div>
                                 <button class="w-full py-3 font-semibold btn-black">Solicitar este préstamo</button>
                             </div>
