@@ -146,10 +146,11 @@
             right: 0;
             bottom: calc(100% + 16px);
             transform: translateY(12px) scale(0.92);
-            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.18), transparent 60%),
+                        linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
             color: #0f172a;
-            padding: 12px 20px;
-            border-radius: 20px 20px 8px 20px;
+            padding: 12px 26px;
+            border-radius: 999px;
             font-weight: 600;
             font-size: 0.95rem;
             box-shadow: 0 18px 36px rgba(15, 23, 42, 0.25);
@@ -169,29 +170,31 @@
             font-size: 1rem;
         }
 
-        .whatsapp-tooltip::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 20px 20px 8px 20px;
-            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 55%);
-            pointer-events: none;
-        }
-
+        .whatsapp-tooltip::before,
         .whatsapp-tooltip::after {
             content: "";
             position: absolute;
-            right: 26px;
-            bottom: -12px;
-            width: 20px;
-            height: 16px;
             background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            border-left: none;
-            border-top: none;
-            transform: rotate(45deg);
-            border-bottom-left-radius: 6px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            pointer-events: none;
+        }
+
+        .whatsapp-tooltip::before {
+            width: 26px;
+            height: 26px;
+            right: 38px;
+            bottom: -10px;
+            border-radius: 50%;
             box-shadow: 8px 12px 16px rgba(15, 23, 42, 0.12);
+        }
+
+        .whatsapp-tooltip::after {
+            width: 22px;
+            height: 22px;
+            right: 16px;
+            bottom: -6px;
+            border-radius: 50%;
+            box-shadow: 6px 10px 14px rgba(15, 23, 42, 0.1);
         }
 
         @keyframes pulse {
@@ -327,7 +330,7 @@
                 </button>
 
                 <div class="flex-shrink-0 flex items-center space-x-3">
-                    <img src="../assets/img/logo2.jpeg" alt="AVANZAR Logo" class="h-10 w-auto rounded">
+                    <img src="../assets/img/logo3.png" alt="AVANZAR Logo" class="h-10 w-auto rounded">
                     <span class="text-xl font-semibold gold-gradient bg-clip-text text-transparent">AVANZAR</span>
                 </div>
 
