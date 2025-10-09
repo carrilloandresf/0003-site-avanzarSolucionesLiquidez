@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-gold: #FFD700;
+            --primary-gold: #D4AF37;
             --deep-gold: #B8860B;
-            --dark-bg: #050505;
+            --light-background: #F9FAFB;
         }
 
         * {
@@ -20,8 +20,8 @@
         }
 
         body {
-            background: var(--dark-bg);
-            color: #fff;
+            background: var(--light-background);
+            color: #1F2937;
             overflow-x: hidden;
         }
 
@@ -30,15 +30,17 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(229, 231, 235, 0.9);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
         }
 
         .glass-dark {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 215, 0, 0.18);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(22px);
+            border: 1px solid rgba(209, 213, 219, 0.9);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
         }
 
         .neomorphism {
@@ -48,16 +50,16 @@
         }
 
         .gold-gradient {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FFF4C3);
+            background: linear-gradient(135deg, #FFE08A, #FACC15, #FFF8E1);
         }
 
         .dark-gradient {
-            background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(24,24,24,0.95));
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(243,244,246,0.95));
         }
 
         .hero-bg {
-            background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(255,215,0,0.08)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,215,0,0.12)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            background: linear-gradient(135deg, rgba(250, 250, 250, 0.95), rgba(255, 224, 138, 0.2)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
             background-size: cover;
             background-position: center;
         }
@@ -106,29 +108,85 @@
             bottom: 24px;
             right: 24px;
             z-index: 1000;
-            animation: pulse 2.4s infinite;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .whatsapp-float .inner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .whatsapp-float::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            background: rgba(37, 211, 102, 0.35);
+            filter: blur(18px);
+            opacity: 0;
+            animation: pulseGlow 3s infinite;
+            pointer-events: none;
+        }
+
+        .whatsapp-button {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            border-radius: 999px;
             background: #25d366;
             color: #fff;
-            padding: 14px 20px;
-            border-radius: 999px;
-            font-weight: 600;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+            font-size: 1.75rem;
+            animation: pulse 3s infinite;
         }
 
-        .whatsapp-float span {
-            font-size: 0.95rem;
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 12px);
+            transform: translateY(10px) scale(0.9);
+            background: #ffffff;
+            color: #1f2937;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+            opacity: 0;
+            pointer-events: none;
+            animation: tooltipWave 8s infinite;
+        }
+
+        .whatsapp-tooltip::after {
+            content: "";
+            position: absolute;
+            right: 20px;
+            bottom: -10px;
+            border-width: 10px 10px 0 10px;
+            border-style: solid;
+            border-color: #ffffff transparent transparent transparent;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
             50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes tooltipWave {
+            0%, 55%, 100% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.9);
+            }
+            10%, 45% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .calculator-gauge {
@@ -142,47 +200,73 @@
             transition: transform 0.5s ease;
         }
 
-        button,
-        .btn-black {
-            background-color: #000;
-            color: var(--primary-gold);
-            border-radius: 999px;
+        button {
             transition: all 0.3s ease;
         }
 
-        button:hover,
+        .btn-black {
+            background-color: var(--primary-gold);
+            color: #fff;
+            border-radius: 999px;
+        }
+
         .btn-black:hover {
-            background-color: #111;
-            color: #FFE066;
+            background-color: var(--deep-gold);
+            color: #fffbea;
         }
 
         .btn-outline {
             border: 1px solid var(--primary-gold);
-            color: var(--primary-gold);
+            color: var(--deep-gold);
             background: transparent;
         }
 
         .btn-outline:hover {
-            background: rgba(255, 215, 0, 0.08);
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        .bg-gray-900 {
+            background-color: #F3F4F6 !important;
+        }
+
+        .text-gray-300 {
+            color: #4B5563 !important;
+        }
+
+        .text-gray-400 {
+            color: #6B7280 !important;
+        }
+
+        .text-yellow-200 {
+            color: #B45309 !important;
+        }
+
+        .text-yellow-300 {
+            color: #CA8A04 !important;
+        }
+
+        .plain-button {
+            background: transparent !important;
+            color: inherit !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
         }
     </style>
 </head>
 <body>
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/573001234567" target="_blank" class="whatsapp-float">
-        <div class="inner hover-glow">
-            <div class="bg-black bg-opacity-20 p-3 rounded-full">
-                <i class="fab fa-whatsapp text-2xl"></i>
-            </div>
-            <span>Habla con nosotros</span>
+        <div class="whatsapp-button hover-glow">
+            <i class="fab fa-whatsapp"></i>
         </div>
+        <div class="whatsapp-tooltip">Habla con nosotros</div>
     </a>
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass-dark">
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+            <div class="flex justify-between items-center h-16 text-white">
+                <button class="md:hidden text-white plain-button" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
 
@@ -191,7 +275,7 @@
                     <span class="text-xl font-semibold gold-gradient bg-clip-text text-transparent">AVANZAR</span>
                 </div>
 
-                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
                     <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
                     <a href="#quienes-somos" class="hover:text-yellow-400 transition-colors">Nosotros</a>
                     <a href="#portafolio" class="hover:text-yellow-400 transition-colors">Portafolio</a>
@@ -203,8 +287,8 @@
             </div>
         </div>
 
-        <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-64 h-full glass-dark md:hidden z-40 p-6 space-y-4">
-            <button onclick="toggleMobileMenu()" class="text-white mb-6">
+        <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-64 h-full bg-black bg-opacity-95 backdrop-blur-sm md:hidden z-40 p-6 space-y-4 text-white">
+            <button onclick="toggleMobileMenu()" class="text-white mb-6 plain-button">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <a href="#inicio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Inicio</a>
@@ -222,10 +306,10 @@
         <section id="inicio" class="scroll-section hero-bg relative">
             <div class="w-full">
                 <div class="max-w-6xl mx-auto px-4 text-center">
-                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 fade-in">
+                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 fade-in text-gray-900">
                         Soluciones de liquidez <span class="text-yellow-400">transparentes</span> y <span class="text-yellow-400">rápidas</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto fade-in">
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto fade-in">
                         En AVANZAR acompañamos tus metas financieras con procesos digitales, asesoría humana y desembolsos ágiles para que cumplas tus objetivos cuando más lo necesitas.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 fade-in">
@@ -305,7 +389,7 @@
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Plazos flexibles</li>
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Mínimos requisitos</li>
                             </ul>
-                            <button class="w-full py-3 font-semibold">Más información</button>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
                         </div>
                         <div id="prestamos-pequenos" class="glass neomorphism rounded-3xl p-8 fade-in hover-float">
                             <div class="text-yellow-400 text-5xl mb-6 text-center">
@@ -318,7 +402,7 @@
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Tasas preferenciales</li>
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Proceso 100% digital</li>
                             </ul>
-                            <button class="w-full py-3 font-semibold">Más información</button>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
                         </div>
                         <div id="otras-opciones" class="glass neomorphism rounded-3xl p-8 fade-in hover-float">
                             <div class="text-yellow-400 text-5xl mb-6 text-center">
@@ -331,7 +415,7 @@
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Factoring</li>
                                 <li><i class="fas fa-check text-yellow-400 mr-2"></i>Asesoría personalizada</li>
                             </ul>
-                            <button class="w-full py-3 font-semibold">Más información</button>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
                         </div>
                     </div>
                 </div>
@@ -557,12 +641,12 @@
                             <h3 class="text-2xl font-bold text-yellow-300">Envíanos un mensaje</h3>
                             <form class="space-y-6">
                                 <div class="grid md:grid-cols-2 gap-4">
-                                    <input type="text" placeholder="Nombre completo" class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-300">
-                                    <input type="email" placeholder="Correo electrónico" class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-300">
+                                    <input type="text" placeholder="Nombre completo" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
+                                    <input type="email" placeholder="Correo electrónico" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
                                 </div>
                                 <div class="grid md:grid-cols-2 gap-4">
-                                    <input type="tel" placeholder="Teléfono" class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-300">
-                                    <select class="w-full bg-black border border-yellow-500 rounded-lg p-3 text-white focus:outline-none focus:border-yellow-300">
+                                    <input type="tel" placeholder="Teléfono" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
+                                    <select class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200">
                                         <option value="">Tipo de consulta</option>
                                         <option value="prestamo">Solicitar préstamo</option>
                                         <option value="informacion">Información general</option>
@@ -570,8 +654,8 @@
                                         <option value="reclamo">Reclamo o sugerencia</option>
                                     </select>
                                 </div>
-                                <textarea rows="4" placeholder="Cuéntanos cómo podemos ayudarte" class="w-full bg-transparent border border-yellow-500 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-300"></textarea>
-                                <button type="submit" class="w-full py-3 font-semibold">Enviar mensaje</button>
+                                <textarea rows="4" placeholder="Cuéntanos cómo podemos ayudarte" class="w-full bg-white border border-gray-300 rounded-lg p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200"></textarea>
+                                <button type="submit" class="w-full py-3 font-semibold btn-black">Enviar mensaje</button>
                             </form>
                         </div>
                         <div class="space-y-8 fade-in">
@@ -705,7 +789,7 @@
                                     </div>
                                     <p class="text-sm text-gray-300 mt-4">El velocímetro compara tu cuota mensual frente al monto solicitado para ayudarte a visualizar la carga financiera de tu crédito.</p>
                                 </div>
-                                <button class="w-full py-3 font-semibold">Solicitar este préstamo</button>
+                                <button class="w-full py-3 font-semibold btn-black">Solicitar este préstamo</button>
                             </div>
                         </div>
                     </div>
