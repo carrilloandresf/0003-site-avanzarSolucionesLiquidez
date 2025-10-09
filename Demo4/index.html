@@ -301,11 +301,22 @@
             color: #CA8A04 !important;
         }
 
-        .plain-button {
-            background: transparent !important;
-            color: inherit !important;
-            border-radius: 0 !important;
-            padding: 0 !important;
+        .mobile-menu-toggle,
+        .mobile-menu-close {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mobile-menu-toggle:hover,
+        .mobile-menu-close:hover {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
         }
     </style>
 </head>
@@ -322,7 +333,7 @@
     <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 text-white">
-                <button class="md:hidden text-white plain-button" onclick="toggleMobileMenu()">
+                <button class="md:hidden text-white mobile-menu-toggle" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
 
@@ -344,7 +355,7 @@
         </div>
 
         <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-64 h-full bg-black bg-opacity-95 backdrop-blur-sm md:hidden z-40 p-6 space-y-4 text-white">
-            <button onclick="toggleMobileMenu()" class="text-white mb-6 plain-button">
+            <button onclick="toggleMobileMenu()" class="text-white mb-6 mobile-menu-close">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <a href="#inicio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Inicio</a>
