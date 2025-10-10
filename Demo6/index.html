@@ -76,6 +76,149 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
         }
 
+        .hero-carousel {
+            position: relative;
+            max-width: 980px;
+            margin: 0 auto 3rem auto;
+            padding: 20px 24px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.65), rgba(30, 41, 59, 0.35));
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+            overflow: hidden;
+        }
+
+        .hero-carousel::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            pointer-events: none;
+        }
+
+        .hero-carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            animation: heroCarouselSlide 18s ease-in-out infinite;
+        }
+
+        .hero-carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .hero-carousel-card {
+            position: relative;
+            flex: 0 0 calc(33.333% - 1rem);
+            border-radius: 20px;
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+        }
+
+        .hero-carousel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+
+        .hero-carousel-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .hero-carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.75) 100%);
+            opacity: 0.9;
+        }
+
+        .hero-carousel-content {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 20px 22px 24px 22px;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .hero-carousel-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            margin-bottom: 14px;
+        }
+
+        .hero-carousel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .hero-carousel-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        @keyframes heroCarouselSlide {
+            0%, 20% {
+                transform: translateX(0);
+            }
+            40%, 60% {
+                transform: translateX(calc(-33.333% - 0.5rem));
+            }
+            80%, 100% {
+                transform: translateX(calc(-66.666% - 1rem));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-carousel-card {
+                flex: 0 0 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-carousel {
+                padding: 18px 18px 22px;
+            }
+
+            .hero-carousel-track {
+                gap: 1rem;
+            }
+
+            .hero-carousel-card {
+                flex: 0 0 80%;
+            }
+
+            .hero-carousel-card img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-carousel {
+                margin-bottom: 2.5rem;
+            }
+
+            .hero-carousel-track {
+                animation-duration: 22s;
+            }
+
+            .hero-carousel-card {
+                flex: 0 0 88%;
+            }
+        }
+
         .scroll-section {
             min-height: 100vh;
             display: flex;
@@ -430,9 +573,67 @@
         <section id="inicio" class="scroll-section hero-bg relative">
             <div class="w-full">
                 <div class="max-w-6xl mx-auto px-4 text-center">
-                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 fade-in text-gray-900">
+                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-8 fade-in text-gray-900">
                         Soluciones de liquidez <span class="text-yellow-400">transparentes</span> y <span class="text-yellow-400">rápidas</span>
                     </h1>
+                    <div class="hero-carousel fade-in">
+                        <div class="hero-carousel-track">
+                            <div class="hero-carousel-card">
+                                <img src="https://images.unsplash.com/photo-1582719478181-2cf4e8e7d5b0?auto=format&fit=crop&w=800&q=80" alt="Familia protegida" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-shield-halved"></i> Portafolio Protección</span>
+                                    <h3 class="hero-carousel-title">Te respaldamos con soluciones a tu medida</h3>
+                                    <p class="hero-carousel-subtitle">Créditos personalizados para cuidar lo que más amas.</p>
+                                </div>
+                            </div>
+                            <div class="hero-carousel-card">
+                                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Mujeres emprendedoras" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-hand-holding-heart"></i> Mujeres que inspiran</span>
+                                    <h3 class="hero-carousel-title">Financiamos proyectos que transforman el mundo</h3>
+                                    <p class="hero-carousel-subtitle">Acompañamiento integral para líderes y emprendedoras.</p>
+                                </div>
+                            </div>
+                            <div class="hero-carousel-card">
+                                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80" alt="Familia en casa" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-headset"></i> Confía, te escuchamos</span>
+                                    <h3 class="hero-carousel-title">Cercanía humana con decisiones oportunas</h3>
+                                    <p class="hero-carousel-subtitle">Estamos listos para apoyarte 24/7 en cada meta financiera.</p>
+                                </div>
+                            </div>
+                            <div class="hero-carousel-card" aria-hidden="true">
+                                <img src="https://images.unsplash.com/photo-1582719478181-2cf4e8e7d5b0?auto=format&fit=crop&w=800&q=80" alt="Familia protegida" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-shield-halved"></i> Portafolio Protección</span>
+                                    <h3 class="hero-carousel-title">Te respaldamos con soluciones a tu medida</h3>
+                                    <p class="hero-carousel-subtitle">Créditos personalizados para cuidar lo que más amas.</p>
+                                </div>
+                            </div>
+                            <div class="hero-carousel-card" aria-hidden="true">
+                                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Mujeres emprendedoras" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-hand-holding-heart"></i> Mujeres que inspiran</span>
+                                    <h3 class="hero-carousel-title">Financiamos proyectos que transforman el mundo</h3>
+                                    <p class="hero-carousel-subtitle">Acompañamiento integral para líderes y emprendedoras.</p>
+                                </div>
+                            </div>
+                            <div class="hero-carousel-card" aria-hidden="true">
+                                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80" alt="Familia en casa" loading="lazy">
+                                <div class="hero-carousel-overlay"></div>
+                                <div class="hero-carousel-content">
+                                    <span class="hero-carousel-tag"><i class="fas fa-headset"></i> Confía, te escuchamos</span>
+                                    <h3 class="hero-carousel-title">Cercanía humana con decisiones oportunas</h3>
+                                    <p class="hero-carousel-subtitle">Estamos listos para apoyarte 24/7 en cada meta financiera.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto fade-in">
                         En AVANZAR acompañamos tus metas financieras con procesos digitales, asesoría humana y desembolsos ágiles para que cumplas tus objetivos cuando más lo necesitas.
                     </p>
