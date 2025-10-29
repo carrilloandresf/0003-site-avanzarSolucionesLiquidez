@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVANZAR Soluciones de Liquidez S.A.S. - Préstamos Financieros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-gold: #B8860B;
+            --light-background: #F9FAFB;
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-background);
+            color: #1F2937;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(229, 231, 235, 0.9);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+        }
+
+        .glass-dark {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(22px);
+            border: 1px solid rgba(209, 213, 219, 0.9);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .neomorphism {
+            box-shadow:
+                20px 20px 60px rgba(0, 0, 0, 0.35),
+                -20px -20px 60px rgba(255, 255, 255, 0.03);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFE08A, #FACC15, #FFF8E1);
+        }
+
+        .dark-gradient {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(243,244,246,0.95));
+        }
+
+        .hover-float {
+            transition: all 0.3s ease;
+        }
+
+        .hover-float:hover {
+            transform: translateY(-10px);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: clamp(520px, 88vh, 760px);
+            background: radial-gradient(circle at top, rgba(250, 224, 138, 0.18), transparent 45%), #05070f;
+            color: #f8fafc;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-carousel {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            max-width: min(1200px, 96vw);
+            margin: 0 auto;
+            border-radius: clamp(24px, 5vw, 42px);
+            overflow: hidden;
+            box-shadow: 0 40px 90px rgba(5, 7, 15, 0.55);
+        }
+
+        .hero-track {
+            display: flex;
+            height: 100%;
+            will-change: transform;
+        }
+
+        .hero-slide {
+            position: relative;
+            min-width: 100%;
+            height: clamp(520px, 88vh, 760px);
+            display: flex;
+            align-items: flex-end;
+            padding: clamp(1.8rem, 6vw, 3.8rem);
+            overflow: hidden;
+        }
+
+        .hero-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 7, 15, 0.05) 25%, rgba(5, 7, 15, 0.7) 90%);
+            z-index: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .hero-slide img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(1.08);
+            transform: scale(1.05);
+            transition: transform 1.1s ease;
+            z-index: 0;
+        }
+
+        .hero-slide.is-active img {
+            transform: scale(1.12);
+        }
+
+        .hero-caption {
+            position: relative;
+            z-index: 2;
+            max-width: min(420px, 72vw);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hero-caption h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.1rem, 6vw, 3.4rem);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: #f8fafc;
+            text-shadow: 0 18px 45px rgba(5, 7, 15, 0.75);
+        }
+
+        .hero-caption p {
+            font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+            line-height: 1.4;
+            color: rgba(241, 245, 249, 0.78);
+        }
+
+        .hero-controls {
+            position: absolute;
+            bottom: clamp(1.6rem, 6vw, 3rem);
+            right: clamp(1.6rem, 6vw, 3rem);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 3;
+        }
+
+        .hero-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: 1px solid rgba(248, 250, 252, 0.25);
+            background: rgba(5, 7, 15, 0.55);
+            color: #f8fafc;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-button:hover {
+            background: rgba(250, 224, 138, 0.25);
+            border-color: rgba(250, 224, 138, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-dots {
+            position: absolute;
+            bottom: clamp(1.6rem, 6vw, 3rem);
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-flex;
+            gap: 0.6rem;
+            z-index: 3;
+        }
+
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(248, 250, 252, 0.38);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hero-dot.is-active {
+            background: linear-gradient(135deg, #d4af37, #facc15);
+            transform: scale(1.1);
+        }
+
+        .hero-desktop {
+            display: block;
+            width: 100%;
+        }
+
+        .hero-mobile {
+            display: none;
+            width: 100%;
+            padding: clamp(2.4rem, 12vw, 3.5rem) clamp(1.5rem, 6vw, 2.5rem) clamp(3rem, 14vw, 4rem);
+        }
+
+        .hero-mobile-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1.8rem, 6vw, 2.6rem);
+            align-items: center;
+            text-align: center;
+            color: #f8fafc;
+        }
+
+        .hero-mobile-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.3rem, 8vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-mobile-title span {
+            color: #facc15;
+        }
+
+        .hero-mobile-description {
+            font-size: clamp(1rem, 3.5vw, 1.125rem);
+            color: rgba(248, 250, 252, 0.8);
+            max-width: 640px;
+        }
+
+        .hero-mobile-carousel {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 24px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.65), rgba(30, 41, 59, 0.35));
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+            overflow: hidden;
+        }
+
+        .hero-mobile-carousel::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            pointer-events: none;
+        }
+
+        .hero-mobile-track {
+            display: flex;
+            gap: 1.5rem;
+            animation: heroMobileCarouselSlide 18s ease-in-out infinite;
+        }
+
+        .hero-mobile-track:hover {
+            animation-play-state: paused;
+        }
+
+        .hero-mobile-card {
+            position: relative;
+            flex: 0 0 calc(33.333% - 1rem);
+            border-radius: 20px;
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+        }
+
+        .hero-mobile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+
+        .hero-mobile-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .hero-mobile-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.75) 100%);
+            opacity: 0.9;
+        }
+
+        .hero-mobile-content {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 20px 22px 24px 22px;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .hero-mobile-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            margin-bottom: 14px;
+        }
+
+        .hero-mobile-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .hero-mobile-card-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        @keyframes heroMobileCarouselSlide {
+            0%, 20% {
+                transform: translateX(0);
+            }
+            40%, 60% {
+                transform: translateX(calc(-33.333% - 0.5rem));
+            }
+            80%, 100% {
+                transform: translateX(calc(-66.666% - 1rem));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-slide {
+                height: clamp(460px, 90vh, 620px);
+                padding: clamp(1.5rem, 7vw, 3rem);
+            }
+
+            .hero-controls {
+                bottom: clamp(1.4rem, 7vw, 2.4rem);
+                right: clamp(1.4rem, 7vw, 2.4rem);
+            }
+
+            .hero-dots {
+                bottom: clamp(1.2rem, 7vw, 2.4rem);
+            }
+
+            .hero-mobile-card {
+                flex: 0 0 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-desktop {
+                display: none;
+            }
+
+            .hero-mobile {
+                display: block;
+            }
+
+            .hero-mobile-carousel {
+                padding: 18px 18px 22px;
+            }
+
+            .hero-mobile-track {
+                gap: 1rem;
+            }
+
+            .hero-mobile-card {
+                flex: 0 0 80%;
+            }
+
+            .hero-mobile-card img {
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hero-desktop {
+                display: block;
+            }
+
+            .hero-mobile {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-carousel {
+                border-radius: 24px;
+            }
+
+            .hero-slide {
+                padding: clamp(1.4rem, 9vw, 2.2rem);
+            }
+
+            .hero-controls {
+                position: static;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 clamp(1.2rem, 6vw, 2rem) clamp(1.4rem, 7vw, 2.2rem);
+            }
+
+            .hero-dots {
+                position: static;
+                transform: none;
+                justify-content: center;
+                padding-bottom: clamp(0.8rem, 5vw, 1.4rem);
+            }
+
+            .hero-mobile-carousel {
+                margin-bottom: 2.5rem;
+            }
+
+            .hero-mobile-track {
+                animation-duration: 22s;
+            }
+
+            .hero-mobile-card {
+                flex: 0 0 88%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-slide {
+                height: clamp(420px, 95vh, 520px);
+            }
+
+            .hero-button {
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        .scroll-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px 0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .distort-on-menu {
+            transition: filter 0.45s ease, transform 0.45s ease;
+            will-change: filter, transform;
+            transform-origin: center;
+        }
+
+        body.mobile-menu-open .distort-on-menu {
+            filter: blur(28px) saturate(190%) brightness(0.65);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-backdrop {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(45px) saturate(220%) contrast(0.75);
+            -webkit-backdrop-filter: blur(45px) saturate(220%) contrast(0.75);
+            background: rgba(8, 11, 19, 0.65);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 39;
+        }
+
+        .mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .whatsapp-float::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            background: rgba(37, 211, 102, 0.35);
+            filter: blur(18px);
+            opacity: 0;
+            animation: pulseGlow 3s infinite;
+            pointer-events: none;
+        }
+
+        .whatsapp-button {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            border-radius: 999px;
+            background: #25d366;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+            font-size: 1.75rem;
+            animation: pulse 3s infinite;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 10px;
+            bottom: calc(100% + 30px);
+            transform: translateY(12px) scale(0.92);
+            background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.18), transparent 60%),
+                        linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            color: #0f172a;
+            padding: 12px 26px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            letter-spacing: 0.01em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            opacity: 0;
+            pointer-events: none;
+            animation: tooltipWave 8s infinite;
+            z-index: 1;
+        }
+
+        .whatsapp-tooltip::before,
+        .whatsapp-tooltip::after {
+            content: "";
+            position: absolute;
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            pointer-events: none;
+        }
+
+        .whatsapp-tooltip::before {
+            width: 18px;
+            height: 18px;
+            right: 35px;
+            bottom: -20px;
+            border-radius: 50%;
+            box-shadow: 8px 12px 16px rgba(15, 23, 42, 0.12);
+        }
+
+        .whatsapp-tooltip::after {
+            width: 11px;
+            height: 11px;
+            right: 26px;
+            bottom: -30px;
+            border-radius: 50%;
+            box-shadow: 6px 10px 14px rgba(15, 23, 42, 0.1);
+        }
+
+        .mobile-menu-panel {
+            background: linear-gradient(160deg, rgba(9, 11, 19, 0.92), rgba(17, 24, 39, 0.76));
+            backdrop-filter: blur(28px) saturate(180%);
+            border-right: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 25px 60px rgba(8, 11, 19, 0.55);
+            isolation: isolate;
+        }
+
+        .mobile-menu-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-right: 1px solid rgba(212, 175, 55, 0.12);
+            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.12), transparent 55%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .mobile-menu-panel a {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            transition: background 0.3s ease, color 0.3s ease;
+            color: rgba(248, 250, 252, 0.92);
+        }
+
+        .mobile-menu-panel a:hover {
+            background: rgba(212, 175, 55, 0.15);
+            color: #fcd34d;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes tooltipWave {
+            0%, 55%, 100% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.9);
+            }
+            10%, 45% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .calculator-gauge {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .gauge-needle {
+            transform-origin: 150px 150px;
+            transition: transform 0.5s ease;
+        }
+
+        button {
+            transition: all 0.3s ease;
+        }
+
+        .btn-black {
+            background-color: var(--primary-gold);
+            color: #fff;
+            border-radius: 999px;
+        }
+
+        .btn-black:hover {
+            background-color: var(--deep-gold);
+            color: #fffbea;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-gold);
+            color: var(--deep-gold);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        .light-section {
+            background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+        }
+
+        .bg-gray-900 {
+            background-color: #050607 !important;
+        }
+
+        .calculator-section {
+            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.14), transparent 65%), #050607;
+        }
+
+        .calculator-section .glass {
+            background: rgba(15, 23, 42, 0.72);
+            border-color: rgba(212, 175, 55, 0.28);
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        .calculator-section .text-gray-300 {
+            color: #e5e7eb !important;
+        }
+
+        .calculator-section .text-gray-400 {
+            color: rgba(226, 232, 240, 0.75) !important;
+        }
+
+        .calculator-section .text-yellow-200 {
+            color: #fde68a !important;
+        }
+
+        .calculator-section .text-yellow-300 {
+            color: #fcd34d !important;
+        }
+
+        .text-gray-300 {
+            color: #4B5563 !important;
+        }
+
+        .text-gray-400 {
+            color: #6B7280 !important;
+        }
+
+        .text-yellow-200 {
+            color: #B45309 !important;
+        }
+
+        .text-yellow-300 {
+            color: #CA8A04 !important;
+        }
+
+        .mobile-menu-toggle,
+        .mobile-menu-close {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mobile-menu-toggle:hover,
+        .mobile-menu-close:hover {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/573001234567" target="_blank" class="whatsapp-float">
+        <div class="whatsapp-button hover-glow">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="whatsapp-tooltip"><span>Habla con nosotros</span></div>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 distort-on-menu">
+            <div class="flex justify-between items-center h-16 text-white">
+                <button class="md:hidden text-white mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <img src="../assets/img/logo3.png" alt="AVANZAR Logo" class="h-8 w-auto rounded">
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-white">
+                    <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
+                    <a href="#quienes-somos" class="hover:text-yellow-400 transition-colors">Nosotros</a>
+                    <a href="#portafolio" class="hover:text-yellow-400 transition-colors">Portafolio</a>
+                    <a href="#beneficios" class="hover:text-yellow-400 transition-colors">Por qué Avanzar</a>
+                    <a href="#educacion" class="hover:text-yellow-400 transition-colors">Educación</a>
+                    <a href="#contacto" class="hover:text-yellow-400 transition-colors">Contacto</a>
+                    <a href="#calculadora" class="btn-black px-4 py-2 text-sm font-semibold">Calculadora</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenuBackdrop" class="mobile-menu-backdrop md:hidden"></div>
+        <div id="mobileMenu" class="mobile-menu mobile-menu-panel fixed top-0 left-0 w-64 h-full md:hidden z-40 p-6 space-y-4 text-white">
+            <button onclick="toggleMobileMenu()" class="text-white mb-6 mobile-menu-close">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <a href="#inicio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Inicio</a>
+            <a href="#quienes-somos" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Nosotros</a>
+            <a href="#portafolio" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Portafolio</a>
+            <a href="#beneficios" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Por qué Avanzar</a>
+            <a href="#educacion" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Educación</a>
+            <a href="#contacto" class="block hover:text-yellow-400 transition-colors" onclick="toggleMobileMenu()">Contacto</a>
+            <a href="#calculadora" class="block btn-black text-center px-4 py-2 mt-4 font-semibold" onclick="toggleMobileMenu()">Calculadora</a>
+        </div>
+    </nav>
+
+    <div class="container-scroll distort-on-menu">
+        <!-- Hero Section -->
+        <section id="inicio" class="scroll-section hero-section" role="region" aria-label="Historias visuales destacadas" aria-live="polite">
+            <div class="hero-desktop">
+                <div class="hero-carousel fade-in" data-hero>
+                    <div class="hero-track" data-hero-track>
+                        <article class="hero-slide is-active" aria-hidden="false">
+                            <img src="../assets/img/pictures/pic2.jpeg" alt="Pareja revisando documentos financieros" loading="lazy">
+                            <div class="hero-caption">
+                                <h2>Liquidez que protege tus planes</h2>
+                                <p>Capital inmediato para seguir avanzando con tranquilidad.</p>
+                            </div>
+                        </article>
+                        <article class="hero-slide" aria-hidden="true">
+                            <img src="../assets/img/pictures/pic1.jpeg" alt="Emprendedora sonriente con su negocio" loading="lazy">
+                            <div class="hero-caption">
+                                <h2>Impulso a tus ideas más valiosas</h2>
+                                <p>Financia proyectos con el respaldo que merecen.</p>
+                            </div>
+                        </article>
+                        <article class="hero-slide" aria-hidden="true">
+                            <img src="../assets/img/pictures/pic3.jpeg" alt="Familia relajada en casa" loading="lazy">
+                            <div class="hero-caption">
+                                <h2>Cerca de ti en cada decisión</h2>
+                                <p>Soluciones humanas para cada momento clave.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="hero-dots" data-hero-dots></div>
+                    <div class="hero-controls">
+                        <button type="button" class="hero-button" data-hero-prev aria-label="Foto anterior">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button type="button" class="hero-button" data-hero-next aria-label="Foto siguiente">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-mobile">
+                <div class="hero-mobile-inner">
+                    <h1 class="hero-mobile-title">Soluciones de liquidez <span>transparentes</span> y <span>rápidas</span></h1>
+                    <div class="hero-mobile-carousel fade-in">
+                        <div class="hero-mobile-track">
+                            <div class="hero-mobile-card">
+                                <img src="../assets/img/pictures/pic2.jpeg" alt="Familia protegida" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-shield-halved"></i> Portafolio Protección</span>
+                                    <h3 class="hero-mobile-card-title">Te respaldamos con soluciones a tu medida</h3>
+                                    <p class="hero-mobile-card-subtitle">Créditos personalizados para cuidar lo que más amas.</p>
+                                </div>
+                            </div>
+                            <div class="hero-mobile-card">
+                                <img src="../assets/img/pictures/pic1.jpeg" alt="Mujeres emprendedoras" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-hand-holding-heart"></i> Mujeres que inspiran</span>
+                                    <h3 class="hero-mobile-card-title">Financiamos proyectos que transforman el mundo</h3>
+                                    <p class="hero-mobile-card-subtitle">Acompañamiento integral para líderes y emprendedoras.</p>
+                                </div>
+                            </div>
+                            <div class="hero-mobile-card">
+                                <img src="../assets/img/pictures/pic3.jpeg" alt="Familia en casa" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-headset"></i> Confía, te escuchamos</span>
+                                    <h3 class="hero-mobile-card-title">Cercanía humana con decisiones oportunas</h3>
+                                    <p class="hero-mobile-card-subtitle">Estamos listos para apoyarte 24/7 en cada meta financiera.</p>
+                                </div>
+                            </div>
+                            <div class="hero-mobile-card" aria-hidden="true">
+                                <img src="../assets/img/pictures/pic4.jpeg" alt="Familia protegida" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-shield-halved"></i> Portafolio Protección</span>
+                                    <h3 class="hero-mobile-card-title">Te respaldamos con soluciones a tu medida</h3>
+                                    <p class="hero-mobile-card-subtitle">Créditos personalizados para cuidar lo que más amas.</p>
+                                </div>
+                            </div>
+                            <div class="hero-mobile-card" aria-hidden="true">
+                                <img src="../assets/img/pictures/pic1.jpeg" alt="Mujeres emprendedoras" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-hand-holding-heart"></i> Mujeres que inspiran</span>
+                                    <h3 class="hero-mobile-card-title">Financiamos proyectos que transforman el mundo</h3>
+                                    <p class="hero-mobile-card-subtitle">Acompañamiento integral para líderes y emprendedoras.</p>
+                                </div>
+                            </div>
+                            <div class="hero-mobile-card" aria-hidden="true">
+                                <img src="../assets/img/pictures/pic3.jpeg" alt="Familia en casa" loading="lazy">
+                                <div class="hero-mobile-overlay"></div>
+                                <div class="hero-mobile-content">
+                                    <span class="hero-mobile-tag"><i class="fas fa-headset"></i> Confía, te escuchamos</span>
+                                    <h3 class="hero-mobile-card-title">Cercanía humana con decisiones oportunas</h3>
+                                    <p class="hero-mobile-card-subtitle">Estamos listos para apoyarte 24/7 en cada meta financiera.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hero-mobile-description">En AVANZAR acompañamos tus metas financieras con procesos digitales, asesoría humana y desembolsos ágiles para que cumplas tus objetivos cuando más lo necesitas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiénes Somos -->
+        <section id="quienes-somos" class="scroll-section light-section">
+            <div class="w-full">
+                <div class="max-w-6xl mx-auto px-4">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Quiénes Somos</h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div id="historia" class="glass neomorphism rounded-2xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-4xl mb-4">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-yellow-300">Nuestra Historia</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Desde 2015 impulsamos personas y empresas con soluciones financieras innovadoras, combinando tecnología, agilidad y transparencia en cada operación.
+                            </p>
+                        </div>
+                        <div id="mision" class="glass neomorphism rounded-2xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-4xl mb-4">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-yellow-300">Misión y Visión</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Facilitamos el acceso a liquidez justa y oportuna, siendo el aliado estratégico que respalda el crecimiento económico de nuestros clientes con excelencia y responsabilidad.
+                            </p>
+                        </div>
+                        <div id="valores" class="glass neomorphism rounded-2xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-4xl mb-4">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-yellow-300">Nuestros Valores</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Trabajamos con transparencia, integridad, compromiso y excelencia, construyendo relaciones duraderas basadas en la confianza y el respeto.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portafolio -->
+        <section id="portafolio" class="scroll-section dark-gradient">
+            <div class="w-full">
+                <div class="max-w-6xl mx-auto px-4">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Nuestro Portafolio</h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div id="prestamos-rapidos" class="glass neomorphism rounded-3xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-5xl mb-6 text-center">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-center text-yellow-300">Préstamos Rápidos</h3>
+                            <ul class="text-gray-300 space-y-2 mb-8">
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Aprobación en 24 horas</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Montos desde $500.000</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Plazos flexibles</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Mínimos requisitos</li>
+                            </ul>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
+                        </div>
+                        <div id="prestamos-pequenos" class="glass neomorphism rounded-3xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-5xl mb-6 text-center">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-center text-yellow-300">Préstamos Pequeños</h3>
+                            <ul class="text-gray-300 space-y-2 mb-8">
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Desde $100.000</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Sin fiador</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Tasas preferenciales</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Proceso 100% digital</li>
+                            </ul>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
+                        </div>
+                        <div id="otras-opciones" class="glass neomorphism rounded-3xl p-8 fade-in hover-float">
+                            <div class="text-yellow-400 text-5xl mb-6 text-center">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold mb-4 text-center text-yellow-300">Otras Opciones</h3>
+                            <ul class="text-gray-300 space-y-2 mb-8">
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Crédito empresarial</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Líneas de crédito</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Factoring</li>
+                                <li><i class="fas fa-check text-yellow-400 mr-2"></i>Asesoría personalizada</li>
+                            </ul>
+                            <button class="w-full py-3 font-semibold btn-black">Más información</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Por qué elegir AVANZAR -->
+        <section id="beneficios" class="scroll-section dark-gradient">
+            <div class="w-full">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h2 class="text-5xl font-bold mb-16 text-center gold-gradient bg-clip-text text-transparent fade-in">¿Por qué elegir AVANZAR?</h2>
+                    <p class="text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto fade-in">
+                        Nos diferenciamos por nuestra combinación única de tecnología avanzada, procesos eficientes y atención humana personalizada.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <div class="fade-in hover-float">
+                            <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                                <i class="fas fa-clock text-3xl text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-yellow-300 text-center">Velocidad Excepcional</h3>
+                            <p class="text-gray-300 mb-4 text-center">Tecnología propia que evalúa tu solicitud en tiempo real, 24/7.</p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Evaluación automática instantánea</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Respuesta en máximo 15 minutos</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Desembolso el mismo día</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Proceso 100% digital</li>
+                            </ul>
+                        </div>
+                        <div class="fade-in hover-float">
+                            <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-3xl text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-yellow-300 text-center">Máxima Seguridad</h3>
+                            <p class="text-gray-300 mb-4 text-center">Protección de grado bancario para todos tus datos personales y financieros.</p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Encriptación SSL 256 bits</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Certificación ISO 27001</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Cumplimiento PCI DSS</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Auditorías constantes</li>
+                            </ul>
+                        </div>
+                        <div class="fade-in hover-float">
+                            <div class="glass neomorphism rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                                <i class="fas fa-percentage text-3xl text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-yellow-300 text-center">Tasas Competitivas</h3>
+                            <p class="text-gray-300 mb-4 text-center">Las mejores tasas del mercado con total transparencia en costos y condiciones.</p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Sin costos ocultos</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Tasas desde 1.8% mensual</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Simulador gratuito</li>
+                                <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i>Sin penalización por pago anticipado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-16">
+                        <h3 class="text-3xl font-bold text-center mb-12 text-yellow-300 fade-in">Proceso simple en 4 pasos</h3>
+                        <div class="grid md:grid-cols-4 gap-6">
+                            <div class="text-center fade-in">
+                                <div class="glass neomorphism rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-yellow-300">1</span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2 text-yellow-300">Solicita Online</h4>
+                                <p class="text-gray-400 text-sm">Completa nuestro formulario seguro en menos de 5 minutos.</p>
+                            </div>
+                            <div class="text-center fade-in">
+                                <div class="glass neomorphism rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-yellow-300">2</span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2 text-yellow-300">Evaluación Automática</h4>
+                                <p class="text-gray-400 text-sm">Sistema de IA que revisa tu perfil crediticio en tiempo real.</p>
+                            </div>
+                            <div class="text-center fade-in">
+                                <div class="glass neomorphism rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-yellow-300">3</span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2 text-yellow-300">Aprobación Rápida</h4>
+                                <p class="text-gray-400 text-sm">Recibe respuesta por WhatsApp, SMS o email en minutos.</p>
+                            </div>
+                            <div class="text-center fade-in">
+                                <div class="glass neomorphism rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-yellow-300">4</span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2 text-yellow-300">Recibe tu Dinero</h4>
+                                <p class="text-gray-400 text-sm">Transferencia inmediata a tu cuenta o entrega en oficina.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glass neomorphism rounded-2xl p-6 text-center hover-float fade-in">
+                            <i class="fas fa-mobile-alt text-3xl text-yellow-400 mb-4"></i>
+                            <h4 class="text-lg font-bold mb-2 text-yellow-300">100% Digital</h4>
+                            <p class="text-gray-300 text-sm">Gestiona todo desde tu celular sin filas ni papeleos.</p>
+                        </div>
+                        <div class="glass neomorphism rounded-2xl p-6 text-center hover-float fade-in">
+                            <i class="fas fa-headset text-3xl text-yellow-400 mb-4"></i>
+                            <h4 class="text-lg font-bold mb-2 text-yellow-300">Soporte 24/7</h4>
+                            <p class="text-gray-300 text-sm">Atención personalizada todos los días del año.</p>
+                        </div>
+                        <div class="glass neomorphism rounded-2xl p-6 text-center hover-float fade-in">
+                            <i class="fas fa-chart-line text-3xl text-yellow-400 mb-4"></i>
+                            <h4 class="text-lg font-bold mb-2 text-yellow-300">Mejora tu Historial</h4>
+                            <p class="text-gray-300 text-sm">Reportes positivos a centrales de riesgo.</p>
+                        </div>
+                        <div class="glass neomorphism rounded-2xl p-6 text-center hover-float fade-in">
+                            <i class="fas fa-gift text-3xl text-yellow-400 mb-4"></i>
+                            <h4 class="text-lg font-bold mb-2 text-yellow-300">Beneficios Exclusivos</h4>
+                            <p class="text-gray-300 text-sm">Descuentos y promociones para clientes frecuentes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educación Financiera -->
+        <section id="educacion" class="scroll-section light-section">
+            <div class="w-full">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h2 class="text-5xl font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Educación Financiera</h2>
+                    <div id="blog" class="mb-16">
+                        <h3 class="text-2xl font-serif font-semibold mb-8 text-yellow-300 fade-in">Artículos Destacados</h3>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <article class="glass neomorphism rounded-2xl overflow-hidden hover-float fade-in">
+                                <div class="h-48 gold-gradient flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-black text-4xl"></i>
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-xl font-semibold mb-2 text-yellow-200">Cómo mejorar tu historial crediticio</h4>
+                                    <p class="text-gray-300 mb-4">Consejos prácticos para mantener un buen score crediticio y abrir nuevas oportunidades financieras.</p>
+                                    <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-200">Leer más →</a>
+                                </div>
+                            </article>
+                            <article class="glass neomorphism rounded-2xl overflow-hidden hover-float fade-in">
+                                <div class="h-48 gold-gradient flex items-center justify-center">
+                                    <i class="fas fa-piggy-bank text-black text-4xl"></i>
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-xl font-semibold mb-2 text-yellow-200">Planificación financiera personal</h4>
+                                    <p class="text-gray-300 mb-4">Estrategias para organizar tus finanzas personales y construir un futuro sólido.</p>
+                                    <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-200">Leer más →</a>
+                                </div>
+                            </article>
+                            <article class="glass neomorphism rounded-2xl overflow-hidden hover-float fade-in">
+                                <div class="h-48 gold-gradient flex items-center justify-center">
+                                    <i class="fas fa-handshake text-black text-4xl"></i>
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-xl font-semibold mb-2 text-yellow-200">Tipos de préstamos y cuál elegir</h4>
+                                    <p class="text-gray-300 mb-4">Guía completa para tomar la mejor decisión financiera según tus necesidades.</p>
+                                    <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-200">Leer más →</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div id="faq" class="mb-16">
+                        <h3 class="text-2xl font-serif font-semibold mb-8 text-yellow-300 fade-in">Preguntas Frecuentes</h3>
+                        <div class="space-y-4">
+                            <div class="glass neomorphism rounded-lg fade-in">
+                                <button onclick="toggleFAQ('faq1')" class="w-full text-left p-6 font-semibold text-yellow-200 flex justify-between items-center">
+                                    <span>¿Cuáles son los requisitos para solicitar un préstamo?</span>
+                                    <i id="icon-faq1" class="fas fa-chevron-down transition-transform"></i>
+                                </button>
+                                <div id="faq1" class="hidden px-6 pb-6 text-gray-300">
+                                    Los requisitos básicos incluyen ser mayor de edad, tener ingresos demostrables, documento de identidad vigente y referencias comerciales. Cada producto puede solicitar requisitos adicionales.
+                                </div>
+                            </div>
+                            <div class="glass neomorphism rounded-lg fade-in">
+                                <button onclick="toggleFAQ('faq2')" class="w-full text-left p-6 font-semibold text-yellow-200 flex justify-between items-center">
+                                    <span>¿Cuánto tiempo tarda la aprobación?</span>
+                                    <i id="icon-faq2" class="fas fa-chevron-down transition-transform"></i>
+                                </button>
+                                <div id="faq2" class="hidden px-6 pb-6 text-gray-300">
+                                    Para préstamos rápidos la aprobación puede ser en 24 horas. Otros productos pueden tardar entre 2 y 5 días hábiles según documentación y análisis requerido.
+                                </div>
+                            </div>
+                            <div class="glass neomorphism rounded-lg fade-in">
+                                <button onclick="toggleFAQ('faq3')" class="w-full text-left p-6 font-semibold text-yellow-200 flex justify-between items-center">
+                                    <span>¿Puedo hacer pagos anticipados?</span>
+                                    <i id="icon-faq3" class="fas fa-chevron-down transition-transform"></i>
+                                </button>
+                                <div id="faq3" class="hidden px-6 pb-6 text-gray-300">
+                                    Sí, puedes realizar pagos anticipados sin penalización. Esto reduce los intereses totales y mejora tu historial crediticio con nosotros.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="glosario">
+                        <h3 class="text-2xl font-serif font-semibold mb-8 text-yellow-300 fade-in">Glosario Financiero</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="glass neomorphism rounded-lg p-6 fade-in">
+                                <h4 class="font-semibold text-yellow-200 mb-2">Tasa de Interés</h4>
+                                <p class="text-gray-300">Porcentaje que se cobra por el uso del dinero prestado, calculado sobre el capital inicial.</p>
+                            </div>
+                            <div class="glass neomorphism rounded-lg p-6 fade-in">
+                                <h4 class="font-semibold text-yellow-200 mb-2">Score Crediticio</h4>
+                                <p class="text-gray-300">Puntaje que evalúa tu comportamiento de pago y determina tu capacidad crediticia.</p>
+                            </div>
+                            <div class="glass neomorphism rounded-lg p-6 fade-in">
+                                <h4 class="font-semibold text-yellow-200 mb-2">Amortización</h4>
+                                <p class="text-gray-300">Proceso de pago gradual de una deuda mediante cuotas periódicas que incluyen capital e intereses.</p>
+                            </div>
+                            <div class="glass neomorphism rounded-lg p-6 fade-in">
+                                <h4 class="font-semibold text-yellow-200 mb-2">Garantía</h4>
+                                <p class="text-gray-300">Bien o aval que respalda el cumplimiento de las obligaciones del préstamo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="scroll-section dark-gradient">
+            <div class="w-full">
+                <div class="max-w-6xl mx-auto px-4">
+                    <h2 class="text-5xl font-bold text-center mb-16 gold-gradient bg-clip-text text-transparent fade-in">Contáctanos</h2>
+                    <div class="max-w-4xl mx-auto space-y-10 fade-in">
+                        <div class="glass neomorphism rounded-3xl p-8 space-y-4 text-left">
+                            <h3 class="text-2xl font-bold text-yellow-300">Asesoría personalizada a un mensaje de distancia</h3>
+                            <p class="text-gray-300">Nuestro equipo financiero está disponible para guiarte por el proceso de tu préstamo y resolver cualquier inquietud en tiempo récord. Elige el canal que prefieras y nos pondremos en contacto contigo.</p>
+                            <div class="flex flex-wrap gap-6 text-sm text-gray-400">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-clock text-yellow-300"></i>
+                                    <span>Tiempo de respuesta promedio: 15 minutos</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-user-tie text-yellow-300"></i>
+                                    <span>Atención especializada y confidencial</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-black p-3 rounded-full text-yellow-300">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-yellow-200">Línea Nacional</h4>
+                                        <p class="text-gray-300">+57 (1) 234-5678</p>
+                                        <p class="text-sm text-gray-400">Atención 24/7 - Llamada gratuita</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-black p-3 rounded-full text-yellow-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-yellow-200">WhatsApp</h4>
+                                        <p class="text-gray-300">+57 300 123 4567</p>
+                                        <p class="text-sm text-gray-400">Respuesta inmediata</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-black p-3 rounded-full text-yellow-300">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-yellow-200">Correo electrónico</h4>
+                                        <p class="text-gray-300">info@avanzar.com.co</p>
+                                        <p class="text-sm text-gray-400">Respuesta en máximo 2 horas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass neomorphism rounded-2xl p-6 hover-float fade-in">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-black p-3 rounded-full text-yellow-300">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-yellow-200">Oficina principal</h4>
+                                        <p class="text-gray-300">Calle 123 #45-67, Bogotá, Colombia</p>
+                                        <p class="text-sm text-gray-400">Lun - Vie: 8:00 AM - 6:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculadora -->
+        <section id="calculadora" class="scroll-section bg-gray-900 calculator-section">
+            <div class="w-full">
+                <div class="max-w-5xl mx-auto px-4 text-center">
+                    <h2 class="text-5xl font-bold mb-12 gold-gradient bg-clip-text text-transparent fade-in">Calculadora de Préstamos</h2>
+                    <div class="glass neomorphism rounded-3xl p-8 md:p-12">
+                        <div class="grid md:grid-cols-2 gap-10 items-start">
+                            <div class="space-y-8 text-left">
+                                <div class="fade-in">
+                                    <label class="block text-yellow-300 mb-2 font-semibold">Monto del préstamo</label>
+                                    <input type="range" id="loanAmount" min="500000" max="50000000" step="100000" value="5000000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2">
+                                        <span>$500.000</span>
+                                        <span id="amountDisplay" class="text-yellow-200 font-semibold">$5.000.000</span>
+                                        <span>$50.000.000</span>
+                                    </div>
+                                </div>
+                                <div class="fade-in">
+                                    <label class="block text-yellow-300 mb-2 font-semibold">Plazo (meses)</label>
+                                    <input type="range" id="loanTerm" min="6" max="60" step="6" value="12" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2">
+                                        <span>6</span>
+                                        <span id="termDisplay" class="text-yellow-200 font-semibold">12 meses</span>
+                                        <span>60</span>
+                                    </div>
+                                </div>
+                                <div class="fade-in">
+                                    <label class="block text-yellow-300 mb-2 font-semibold">Tasa de interés</label>
+                                    <select id="interestRate" class="w-full bg-black border border-yellow-500 text-yellow-200 p-3 rounded-lg" onchange="updateCalculator()">
+                                        <option value="1.8">1.8% - Hipotecario</option>
+                                        <option value="2.0">2.0% - Empresarial</option>
+                                        <option value="2.2">2.2% - Vehicular</option>
+                                        <option value="2.5" selected>2.5% - Express</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="space-y-8 fade-in">
+                                <div class="glass neomorphism rounded-2xl p-6">
+                                    <h4 class="text-lg font-semibold text-yellow-300 mb-4">Nivel de tu cuota</h4>
+                                    <div class="calculator-gauge">
+                                        <svg width="300" height="200" viewBox="0 0 300 200">
+                                            <path d="M 50 150 A 100 100 0 0 1 100 63.4" stroke="#EF4444" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <path d="M 100 63.4 A 100 100 0 0 1 200 63.4" stroke="#F59E0B" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <path d="M 200 63.4 A 100 100 0 0 1 250 150" stroke="#10B981" stroke-width="18" fill="none" stroke-linecap="round"></path>
+                                            <g id="gaugeNeedle" class="gauge-needle">
+                                                <line x1="150" y1="150" x2="150" y2="60" stroke="#FFD700" stroke-width="4" stroke-linecap="round"></line>
+                                                <circle cx="150" cy="150" r="8" fill="#FFD700"></circle>
+                                            </g>
+                                            <text x="50" y="170" fill="#fecaca" text-anchor="middle" font-size="12">Alto</text>
+                                            <text x="150" y="50" fill="#fef3c7" text-anchor="middle" font-size="12">Moderado</text>
+                                            <text x="250" y="170" fill="#bbf7d0" text-anchor="middle" font-size="12">Saludable</text>
+                                        </svg>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mt-4">El velocímetro compara tu cuota mensual frente al monto solicitado y resalta el nivel de esfuerzo financiero: rojo (alto), amarillo (moderado) y verde (saludable).</p>
+                                </div>
+                                <div class="bg-black bg-opacity-60 rounded-2xl p-6 text-left">
+                                    <h3 class="text-lg font-bold text-yellow-300 mb-4">Resumen del préstamo</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between text-gray-300">
+                                            <span>Cuota mensual:</span>
+                                            <span class="font-semibold text-yellow-200" id="monthlyPayment">$0</span>
+                                        </div>
+                                        <div class="flex justify-between text-gray-300">
+                                            <span>Total a pagar:</span>
+                                            <span class="font-semibold text-yellow-200" id="totalPayment">$0</span>
+                                        </div>
+                                        <div class="flex justify-between text-gray-300">
+                                            <span>Total intereses:</span>
+                                            <span class="font-semibold text-yellow-200" id="totalInterest">$0</span>
+                                        </div>
+                                        <div class="flex justify-between text-gray-300">
+                                            <span>Papelería (2%):</span>
+                                            <span class="font-semibold text-yellow-200" id="paperworkCost">$0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="w-full py-3 font-semibold btn-black">Solicitar este préstamo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold gold-gradient bg-clip-text text-transparent mb-4">AVANZAR</h3>
+                        <p class="text-gray-400 mb-4">Soluciones de liquidez confiables para tu crecimiento financiero desde 2015.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-yellow-400 hover:text-yellow-200 transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                            <a href="#" class="text-yellow-400 hover:text-yellow-200 transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                            <a href="#" class="text-yellow-400 hover:text-yellow-200 transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                            <a href="#" class="text-yellow-400 hover:text-yellow-200 transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-yellow-300 mb-4">Productos</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#portafolio" class="hover:text-yellow-200 transition-colors">Préstamos Rápidos</a></li>
+                            <li><a href="#portafolio" class="hover:text-yellow-200 transition-colors">Préstamos Pequeños</a></li>
+                            <li><a href="#portafolio" class="hover:text-yellow-200 transition-colors">Líneas de Crédito</a></li>
+                            <li><a href="#portafolio" class="hover:text-yellow-200 transition-colors">Factoring</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-yellow-300 mb-4">Empresa</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#quienes-somos" class="hover:text-yellow-200 transition-colors">Quiénes Somos</a></li>
+                            <li><a href="#beneficios" class="hover:text-yellow-200 transition-colors">Por qué AVANZAR</a></li>
+                            <li><a href="#educacion" class="hover:text-yellow-200 transition-colors">Educación Financiera</a></li>
+                            <li><a href="#calculadora" class="hover:text-yellow-200 transition-colors">Calculadora</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-yellow-300 mb-4">Contacto</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>+57 (1) 234-5678</li>
+                            <li>info@avanzar.com.co</li>
+                            <li>Calle 123 #45-67, Bogotá</li>
+                            <li>Atención 24/7</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 mt-10 pt-8 text-center text-gray-500 text-sm">
+                    <p>&copy; 2024 AVANZAR Soluciones de Liquidez S.A.S. Todos los derechos reservados.</p>
+                    <p class="mt-2">
+                        <a href="#" class="hover:text-yellow-200 transition-colors">Políticas de Privacidad</a> ·
+                        <a href="#" class="hover:text-yellow-200 transition-colors">Términos y Condiciones</a> ·
+                        <a href="#" class="hover:text-yellow-200 transition-colors">Defensoría del Consumidor Financiero</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const backdrop = document.getElementById('mobileMenuBackdrop');
+
+            if (!menu) {
+                return;
+            }
+
+            menu.classList.toggle('open');
+            const isOpen = menu.classList.contains('open');
+
+            if (backdrop) {
+                backdrop.classList.toggle('open', isOpen);
+            }
+
+            document.body.classList.toggle('overflow-hidden', isOpen);
+            document.body.classList.toggle('mobile-menu-open', isOpen);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const backdrop = document.getElementById('mobileMenuBackdrop');
+            if (backdrop) {
+                backdrop.addEventListener('click', toggleMobileMenu);
+            }
+
+            document.querySelectorAll('[data-hero]').forEach(initHeroCarousel);
+        });
+
+        function initHeroCarousel(slider) {
+            if (!slider) {
+                return;
+            }
+
+            const track = slider.querySelector('[data-hero-track]');
+            if (!track) {
+                return;
+            }
+
+            const originals = Array.from(track.children);
+            if (originals.length <= 1) {
+                return;
+            }
+
+            const prevButton = slider.querySelector('[data-hero-prev]');
+            const nextButton = slider.querySelector('[data-hero-next]');
+            const dotsContainer = slider.querySelector('[data-hero-dots]');
+
+            const firstClone = originals[0].cloneNode(true);
+            const lastClone = originals[originals.length - 1].cloneNode(true);
+            firstClone.classList.add('is-clone');
+            lastClone.classList.add('is-clone');
+            firstClone.setAttribute('aria-hidden', 'true');
+            lastClone.setAttribute('aria-hidden', 'true');
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originals[0]);
+
+            const slides = Array.from(track.children);
+            let index = 1;
+            let isTransitioning = false;
+            let slideWidth = slider.getBoundingClientRect().width;
+            const transitionTiming = 'transform 0.8s cubic-bezier(0.45, 0, 0.1, 1)';
+
+            const dots = originals.map((_, dotIndex) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'hero-dot';
+                dot.setAttribute('aria-label', `Ir a la foto ${dotIndex + 1}`);
+                dot.addEventListener('click', () => {
+                    goTo(dotIndex + 1);
+                    restartAutoplay();
+                });
+                return dot;
+            });
+
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                dots.forEach(dot => dotsContainer.appendChild(dot));
+            }
+
+            function setTransform(instant = false) {
+                track.style.transition = instant ? 'none' : transitionTiming;
+                track.style.transform = `translateX(-${slideWidth * index}px)`;
+                if (instant) {
+                    void track.offsetHeight;
+                }
+            }
+
+            function updateSlides() {
+                slides.forEach((slide, slideIndex) => {
+                    const isActive = slideIndex === index;
+                    slide.classList.toggle('is-active', isActive);
+                    slide.setAttribute('aria-hidden', (!isActive).toString());
+                });
+            }
+
+            function updateDots() {
+                const active = ((index - 1) % originals.length + originals.length) % originals.length;
+                dots.forEach((dot, dotIndex) => {
+                    dot.classList.toggle('is-active', dotIndex === active);
+                    dot.setAttribute('aria-current', dotIndex === active ? 'true' : 'false');
+                });
+            }
+
+            function sync(instant = false) {
+                setTransform(instant);
+                updateSlides();
+                updateDots();
+            }
+
+            function goTo(targetIndex) {
+                if (isTransitioning || targetIndex === index) {
+                    return;
+                }
+                index = targetIndex;
+                isTransitioning = true;
+                sync(false);
+            }
+
+            function next() {
+                goTo(index + 1);
+            }
+
+            function prev() {
+                goTo(index - 1);
+            }
+
+            const autoplayInterval = 7000;
+            let autoplayId = null;
+
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayId = setInterval(() => {
+                    goTo(index + 1);
+                }, autoplayInterval);
+            }
+
+            function stopAutoplay() {
+                if (autoplayId) {
+                    clearInterval(autoplayId);
+                    autoplayId = null;
+                }
+            }
+
+            function restartAutoplay() {
+                stopAutoplay();
+                startAutoplay();
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    next();
+                    restartAutoplay();
+                });
+            }
+
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    prev();
+                    restartAutoplay();
+                });
+            }
+
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
+            track.addEventListener('transitionend', () => {
+                if (!isTransitioning) {
+                    return;
+                }
+
+                if (index === slides.length - 1) {
+                    index = 1;
+                    sync(true);
+                } else if (index === 0) {
+                    index = slides.length - 2;
+                    sync(true);
+                } else {
+                    setTransform(false);
+                }
+
+                isTransitioning = false;
+            });
+
+            window.addEventListener('resize', () => {
+                slideWidth = slider.getBoundingClientRect().width;
+                sync(true);
+            });
+
+            sync(true);
+            startAutoplay();
+        }
+
+        function toggleFAQ(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+            if (icon) {
+                icon.classList.toggle('rotate-180');
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function updateCalculator() {
+            const amount = parseFloat(document.getElementById('loanAmount').value);
+            const term = parseInt(document.getElementById('loanTerm').value);
+            const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+
+            document.getElementById('amountDisplay').textContent = formatCurrency(amount);
+            document.getElementById('termDisplay').textContent = `${term} meses`;
+
+            const monthlyRate = rate;
+            const monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term));
+            const totalPayment = monthlyPayment * term;
+            const totalInterest = totalPayment - amount;
+            const paperwork = amount * 0.02;
+
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment + paperwork);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('paperworkCost').textContent = formatCurrency(paperwork);
+
+            updateGauge(monthlyPayment, amount);
+        }
+
+        function updateGauge(monthlyPayment, amount) {
+            const ratio = (monthlyPayment / amount) * 100;
+            const clampedRatio = Math.min(Math.max(ratio, 0), 12);
+            const angle = (clampedRatio / 12) * 180 - 90;
+            const needle = document.getElementById('gaugeNeedle');
+            needle.style.transform = `rotate(${angle}deg)`;
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 120) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', () => {
+            handleScrollAnimations();
+            updateCalculator();
+        });
+    </script>
+</body>
+</html>
