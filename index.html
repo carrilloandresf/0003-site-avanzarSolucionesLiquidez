@@ -1636,7 +1636,7 @@
                                         -->
                                     </div>
                                 </div>
-                                <a class="w-full py-3 font-semibold btn-black inline-block text-center" target="_blank" rel="noopener" href="https://wa.me/573102486946?text=Hola%20vengo%20desde%20el%20sitio%20web">
+                                <a id="calculatorWhatsappLink" class="w-full py-3 font-semibold btn-black inline-block text-center" target="_blank" rel="noopener" href="https://wa.me/573102486946?text=Hola%20vengo%20desde%20el%20sitio%20web">
                                     Solicitar este préstamo
                                 </a>
                             </div>
@@ -2053,6 +2053,24 @@
             updateCalculator();
         }
 
+        function updateCalculatorWhatsappLink({ frequency, amount, term }) {
+            const link = document.getElementById('calculatorWhatsappLink');
+            if (!link) {
+                return;
+            }
+
+            const frequencyLabel = frequency === 'weekly' ? 'Cuota semanal' : 'Cuota quincenal';
+            const termLabel = frequency === 'weekly' ? `${term} semanas` : `${term} quincenas`;
+            const message = [
+                'Hola, quiero solicitar este préstamo y empezar estudio de crédito.',
+                `Tipo de cuota: ${frequencyLabel}`,
+                `Valor crédito: ${formatCurrency(amount)}`,
+                `Plazo: ${termLabel}`
+            ].join('\n');
+
+            link.href = `https://wa.me/573102486946?text=${encodeURIComponent(message)}`;
+        }
+
         function roundToNearestHundred(value) {
             return Math.round(value / 100) * 100;
         }
@@ -2142,6 +2160,7 @@
             document.getElementById('monthlyPayment').textContent = formatCurrency(installment);
             document.getElementById('summaryPayment').textContent = formatCurrency(installment);
 
+            updateCalculatorWhatsappLink({ frequency, amount, term });
             updateGauge(installment, amount);
         }
 
