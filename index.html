@@ -96,10 +96,112 @@
             scroll-behavior: smooth;
         }
 
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
         body {
+            width: 100%;
+            max-width: 100%;
             background: var(--light-background);
             color: #1F2937;
             overflow-x: hidden;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+        }
+
+        .container-scroll {
+            width: 100%;
+            overflow-x: clip;
+        }
+
+        .site-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: #000;
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+        }
+
+        .site-loader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .site-loader-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            text-align: center;
+        }
+
+        .site-loader-logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            max-width: 72vw;
+        }
+
+        .site-loader-logo {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
+            animation: loaderLogo 1.8s ease-in-out infinite;
+        }
+
+        .site-loader-text {
+            font-size: 0.82rem;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: rgba(248, 250, 252, 0.74);
+        }
+
+        .site-loader-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .site-loader-dots span {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #fde68a, #d4af37);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.24);
+            animation: loaderDot 0.9s ease-in-out infinite;
+        }
+
+        .site-loader-dots span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .site-loader-dots span:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes loaderLogo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes loaderDot {
+            0%, 100% { transform: translateY(0); opacity: 0.55; }
+            50% { transform: translateY(-6px); opacity: 1; }
         }
 
         .font-serif {
@@ -582,6 +684,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+            max-width: calc(100vw - 24px);
         }
 
         .whatsapp-float::before {
@@ -669,6 +772,7 @@
             border-right: 1px solid rgba(148, 163, 184, 0.35);
             box-shadow: 0 25px 60px rgba(8, 11, 19, 0.55);
             isolation: isolate;
+            max-width: calc(100vw - 1rem);
         }
 
         .mobile-menu-panel::before {
@@ -830,6 +934,35 @@
             background: rgba(0, 0, 0, 0.95);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
         }
+
+        @media (max-width: 640px) {
+            .scroll-section {
+                min-height: auto;
+                padding: 104px 0 72px 0;
+            }
+
+            .whatsapp-float {
+                right: 14px;
+                bottom: 18px;
+            }
+
+            .whatsapp-tooltip {
+                right: 0;
+                bottom: calc(100% + 18px);
+                max-width: min(78vw, 240px);
+                padding: 10px 18px;
+                text-align: center;
+                white-space: normal;
+            }
+
+            .whatsapp-tooltip::before {
+                right: 26px;
+            }
+
+            .whatsapp-tooltip::after {
+                right: 18px;
+            }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -897,6 +1030,20 @@
     </script>
 </head>
 <body>
+    <div id="siteLoader" class="site-loader" aria-label="Cargando sitio">
+        <div class="site-loader-panel">
+            <div class="site-loader-logo-wrap">
+                <img src="assets/img/logo.jpeg" alt="AVANZAR" class="site-loader-logo">
+            </div>
+            <div class="site-loader-text">Cargando</div>
+            <div class="site-loader-dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/573102486946?text=Hola%20vengo%20desde%20el%20sitio%20web" target="_blank" class="whatsapp-float">
         <div class="whatsapp-button hover-glow">
@@ -1414,37 +1561,44 @@
                         <div class="grid md:grid-cols-2 gap-10 items-start">
                             <div class="space-y-8 text-left">
                                 <div class="fade-in">
-                                    <label class="block text-yellow-300 mb-2 font-semibold">Monto del préstamo</label>
-                                    <input type="range" id="loanAmount" min="500000" max="50000000" step="100000" value="5000000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
-                                    <div class="flex justify-between text-sm text-gray-400 mt-2">
-                                        <span>$500.000</span>
-                                        <span id="amountDisplay" class="text-yellow-200 font-semibold">$5.000.000</span>
+                                    <label class="block text-yellow-300 mb-2 font-semibold">Tipo de cuota</label>
+                                    <select id="paymentFrequency" class="w-full bg-black border border-yellow-500 text-yellow-200 p-3 rounded-lg" onchange="handleFrequencyChange()">
+                                        <option value="weekly" selected>Cuota semanal</option>
+                                        <option value="biweekly">Cuota quincenal</option>
+                                    </select>
+                                    <p class="text-xs text-gray-400 mt-2">La calculadora estima la cuota según pagos semanales o quincenales.</p>
+                                </div>
+                                <div class="fade-in">
+                                    <label class="block text-yellow-300 mb-2 font-semibold">Valor crédito</label>
+                                    <input type="text" id="loanAmount" inputmode="numeric" value="$5.000.000" class="w-full bg-black border border-yellow-500 text-yellow-200 p-3 rounded-lg" oninput="handleAmountInput(event)">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2 gap-3">
+                                        <span>$0</span>
+                                        <span id="amountDisplay" class="text-yellow-200 font-semibold text-right break-words">$5.000.000</span>
                                         <span>$50.000.000</span>
                                     </div>
                                 </div>
                                 <div class="fade-in">
-                                    <label class="block text-yellow-300 mb-2 font-semibold">Plazo (meses)</label>
-                                    <input type="range" id="loanTerm" min="6" max="60" step="6" value="12" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
-                                    <div class="flex justify-between text-sm text-gray-400 mt-2">
-                                        <span>6</span>
-                                        <span id="termDisplay" class="text-yellow-200 font-semibold">12 meses</span>
-                                        <span>60</span>
+                                    <label id="loanTermLabel" class="block text-yellow-300 mb-2 font-semibold">Plazo de crédito Semanas</label>
+                                    <input type="range" id="loanTerm" min="1" max="24" step="1" value="12" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2 gap-3">
+                                        <span>Min. 1</span>
+                                        <span id="termDisplay" class="text-yellow-200 font-semibold text-right break-words">12 semanas</span>
+                                        <span id="termMaxDisplay">Max. 24</span>
                                     </div>
                                 </div>
                                 <div class="fade-in">
                                     <label class="block text-yellow-300 mb-2 font-semibold">Tasa de interés</label>
-                                    <select id="interestRate" class="w-full bg-black border border-yellow-500 text-yellow-200 p-3 rounded-lg" onchange="updateCalculator()">
-                                        <option value="2.1">2.1% - Microcrédito ágil</option>
-                                        <option value="1.8" selected>1.8% - Crédito comercial</option>
-                                        <option value="1.6">1.6% - Factoring y anticipos</option>
-                                        <option value="1.4">1.4% - Crédito para empleados</option>
-                                    </select>
-                                    <p class="text-xs text-gray-400 mt-2">Tasas calculadas según las líneas vigentes del portafolio para estimar tu cuota mensual.</p>
+                                    <input type="range" id="interestRate" min="1.4" max="2.1" step="0.1" value="1.8" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateCalculator()">
+                                    <div class="flex justify-between text-sm text-gray-400 mt-2 gap-3">
+                                        <span>1.4%</span>
+                                        <span id="interestDisplay" class="text-yellow-200 font-semibold text-right break-words">1.8%</span>
+                                        <span>2.1%</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="space-y-8 fade-in">
                                 <div class="glass neomorphism rounded-2xl p-6">
-                                    <h4 class="text-lg font-semibold text-yellow-300 mb-4">Nivel de tu cuota</h4>
+                                    <h4 class="text-lg font-semibold text-yellow-300 mb-4">Resultado de tu cuota</h4>
                                     <div class="calculator-gauge">
                                         <svg width="300" height="200" viewBox="0 0 300 200">
                                             <path d="M 50 150 A 100 100 0 0 1 100 63.4" stroke="#EF4444" stroke-width="18" fill="none" stroke-linecap="round"></path>
@@ -1459,27 +1613,27 @@
                                             <text x="250" y="170" fill="#bbf7d0" text-anchor="middle" font-size="12">Saludable</text>
                                         </svg>
                                     </div>
-                                    <p class="text-sm text-gray-300 mt-4">El velocímetro compara tu cuota mensual frente al monto solicitado y resalta el nivel de esfuerzo financiero: rojo (alto), amarillo (moderado) y verde (saludable).</p>
+                                    <div class="mt-4 space-y-2 text-center">
+                                        <p id="paymentLabel" class="text-sm uppercase tracking-[0.3em] text-gray-400">Valor cuota Semanal</p>
+                                        <p id="monthlyPayment" class="text-3xl font-bold text-yellow-200">$0</p>
+                                        <p class="text-sm text-gray-300">Cálculo estimado para la periodicidad seleccionada.</p>
+                                    </div>
                                 </div>
                                 <div class="bg-black bg-opacity-60 rounded-2xl p-6 text-left">
                                     <h3 class="text-lg font-bold text-yellow-300 mb-4">Resumen del préstamo</h3>
                                     <div class="space-y-3">
                                         <div class="flex justify-between text-gray-300">
-                                            <span>Cuota mensual:</span>
-                                            <span class="font-semibold text-yellow-200" id="monthlyPayment">$0</span>
+                                            <span id="summaryPaymentLabel">Valor cuota Semanal:</span>
+                                            <span class="font-semibold text-yellow-200" id="summaryPayment">$0</span>
                                         </div>
-                                        <div class="flex justify-between text-gray-300">
-                                            <span>Total a pagar:</span>
-                                            <span class="font-semibold text-yellow-200" id="totalPayment">$0</span>
-                                        </div>
-                                        <div class="flex justify-between text-gray-300">
-                                            <span>Total intereses:</span>
-                                            <span class="font-semibold text-yellow-200" id="totalInterest">$0</span>
-                                        </div>
-                                        <div class="flex justify-between text-gray-300">
-                                            <span>Papelería (2%):</span>
-                                            <span class="font-semibold text-yellow-200" id="paperworkCost">$0</span>
-                                        </div>
+                                        <!--
+                                        <div class="flex justify-between text-gray-300"><span>Intereses:</span><span class="font-semibold text-yellow-200" id="hiddenInterest">$0</span></div>
+                                        <div class="flex justify-between text-gray-300"><span>Seguro Deudores:</span><span class="font-semibold text-yellow-200" id="hiddenDebtorInsurance">$0</span></div>
+                                        <div class="flex justify-between text-gray-300"><span>Aval de riesgo:</span><span class="font-semibold text-yellow-200" id="hiddenRiskGuarantee">$0</span></div>
+                                        <div class="flex justify-between text-gray-300"><span>Administracion:</span><span class="font-semibold text-yellow-200" id="hiddenAdministration">$0</span></div>
+                                        <div class="flex justify-between text-gray-300"><span>Papeleria:</span><span class="font-semibold text-yellow-200" id="hiddenPaperwork">$0</span></div>
+                                        <div class="flex justify-between text-gray-300"><span>Actualizacion Datacredito:</span><span class="font-semibold text-yellow-200" id="hiddenDatacredito">$0</span></div>
+                                        -->
                                     </div>
                                 </div>
                                 <a class="w-full py-3 font-semibold btn-black inline-block text-center" target="_blank" rel="noopener" href="https://wa.me/573102486946?text=Hola%20vengo%20desde%20el%20sitio%20web">
@@ -1547,6 +1701,18 @@
     </footer>
 
     <script>
+        const CALCULATOR_CONSTANTS = {
+            debtorInsuranceRate: 0.00479,
+            riskGuaranteeRate: 0.03861,
+            administrationRate: 0.01123,
+            paperworkRate: 0.00578,
+            datacreditoFee: 13600,
+            weeklyCharge: 2200,
+            biweeklyCharge: 3800,
+            // C24 no fue especificado en el Excel compartido; se mantiene en cero.
+            extraCharge: 0
+        };
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const backdrop = document.getElementById('mobileMenuBackdrop');
@@ -1575,13 +1741,47 @@
             document.querySelectorAll('[data-hero]').forEach(initHeroCarousel);
             document.querySelectorAll('[data-mobile-carousel]').forEach(initMobileHeroCarousel);
             handleScrollAnimations();
-            updateCalculator();
+            handleFrequencyChange();
 
             const currentYear = document.getElementById('currentYear');
             if (currentYear) {
                 currentYear.textContent = new Date().getFullYear();
             }
+
+            showSiteLoader();
         });
+
+        function showSiteLoader() {
+            const loader = document.getElementById('siteLoader');
+            if (!loader) {
+                return;
+            }
+
+            const minimumDuration = 3000;
+            const startTime = Date.now();
+            let isHidden = false;
+
+            const hideLoader = () => {
+                if (isHidden) {
+                    return;
+                }
+
+                const elapsed = Date.now() - startTime;
+                if (elapsed < minimumDuration) {
+                    window.setTimeout(hideLoader, minimumDuration - elapsed);
+                    return;
+                }
+
+                isHidden = true;
+                loader.classList.add('is-hidden');
+                window.setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            };
+
+            window.setTimeout(hideLoader, minimumDuration);
+            window.addEventListener('load', hideLoader, { once: true });
+        }
 
         function initHeroCarousel(slider) {
             if (!slider) {
@@ -1837,30 +2037,116 @@
             }).format(amount);
         }
 
+        function parseCurrencyInput(value) {
+            const numericValue = String(value || '').replace(/\D/g, '');
+            return numericValue ? parseInt(numericValue, 10) : 0;
+        }
+
+        function handleAmountInput(event) {
+            const input = event?.target;
+            if (!input) {
+                return;
+            }
+
+            const amount = Math.min(parseCurrencyInput(input.value), 50000000);
+            input.value = formatCurrency(amount);
+            updateCalculator();
+        }
+
+        function roundToNearestHundred(value) {
+            return Math.round(value / 100) * 100;
+        }
+
+        function handleFrequencyChange() {
+            const frequency = document.getElementById('paymentFrequency')?.value || 'weekly';
+            const termInput = document.getElementById('loanTerm');
+            const termLabel = document.getElementById('loanTermLabel');
+            const termDisplay = document.getElementById('termDisplay');
+            const termMaxDisplay = document.getElementById('termMaxDisplay');
+
+            const maxTerm = frequency === 'weekly' ? 24 : 12;
+            const unit = frequency === 'weekly' ? 'Semanas' : 'Quincenas';
+
+            if (termInput) {
+                termInput.max = maxTerm;
+                if (parseInt(termInput.value, 10) > maxTerm) {
+                    termInput.value = maxTerm;
+                }
+            }
+
+            if (termLabel) {
+                termLabel.textContent = `Plazo de crédito ${unit}`;
+            }
+
+            if (termMaxDisplay) {
+                termMaxDisplay.textContent = `Max. ${maxTerm}`;
+            }
+
+            if (termDisplay && termInput) {
+                termDisplay.textContent = `${termInput.value} ${frequency === 'weekly' ? 'semanas' : 'quincenas'}`;
+            }
+
+            updateCalculator();
+        }
+
         function updateCalculator() {
-            const amount = parseFloat(document.getElementById('loanAmount').value);
-            const term = parseInt(document.getElementById('loanTerm').value);
-            const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const frequency = document.getElementById('paymentFrequency')?.value || 'weekly';
+            const amountInput = document.getElementById('loanAmount');
+            const termInput = document.getElementById('loanTerm');
+            const rateInput = document.getElementById('interestRate');
+
+            const maxTerm = frequency === 'weekly' ? 24 : 12;
+            const periodLabel = frequency === 'weekly' ? 'semanas' : 'quincenas';
+            const paymentLabel = frequency === 'weekly' ? 'Valor cuota Semanal' : 'Valor cuota Quincenal';
+
+            let amount = parseCurrencyInput(amountInput?.value || '0');
+            let term = parseInt(termInput?.value || '1', 10);
+            let ratePercent = parseFloat(rateInput?.value || '1.8');
+
+            amount = Math.min(Math.max(Number.isNaN(amount) ? 0 : amount, 0), 50000000);
+            term = Math.min(Math.max(Number.isNaN(term) ? 1 : term, 1), maxTerm);
+            ratePercent = Math.min(Math.max(Number.isNaN(ratePercent) ? 1.8 : ratePercent, 1.4), 2.1);
+
+            if (amountInput) {
+                amountInput.value = formatCurrency(amount);
+            }
+
+            if (termInput) {
+                termInput.value = term;
+            }
+
+            if (rateInput) {
+                rateInput.value = ratePercent.toFixed(1);
+            }
 
             document.getElementById('amountDisplay').textContent = formatCurrency(amount);
-            document.getElementById('termDisplay').textContent = `${term} meses`;
+            document.getElementById('termDisplay').textContent = `${term} ${periodLabel}`;
+            document.getElementById('interestDisplay').textContent = `${ratePercent.toFixed(1)}%`;
 
-            const monthlyRate = rate;
-            const monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term));
-            const totalPayment = monthlyPayment * term;
-            const totalInterest = totalPayment - amount;
-            const paperwork = amount * 0.02;
+            const rate = ratePercent / 100;
+            const periodFactor = frequency === 'weekly' ? term / 4 : term / 2;
+            const constants = CALCULATOR_CONSTANTS;
 
-            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
-            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment + paperwork);
-            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
-            document.getElementById('paperworkCost').textContent = formatCurrency(paperwork);
+            const interests = periodFactor * amount * rate;
+            const debtorInsurance = periodFactor * constants.debtorInsuranceRate * amount;
+            const riskGuarantee = (constants.riskGuaranteeRate * amount) + ((periodFactor - 1) * (constants.riskGuaranteeRate * 0.6) * amount);
+            const administration = periodFactor * constants.administrationRate * amount;
+            const paperwork = periodFactor * constants.paperworkRate * amount;
+            const datacredito = periodFactor * constants.datacreditoFee;
+            const periodicCharge = frequency === 'weekly' ? constants.weeklyCharge : constants.biweeklyCharge;
 
-            updateGauge(monthlyPayment, amount);
+            const installment = roundToNearestHundred((((amount + interests + debtorInsurance + riskGuarantee + administration + paperwork + datacredito + constants.extraCharge) / term) + periodicCharge));
+
+            document.getElementById('paymentLabel').textContent = paymentLabel;
+            document.getElementById('summaryPaymentLabel').textContent = `${paymentLabel}:`;
+            document.getElementById('monthlyPayment').textContent = formatCurrency(installment);
+            document.getElementById('summaryPayment').textContent = formatCurrency(installment);
+
+            updateGauge(installment, amount);
         }
 
         function updateGauge(monthlyPayment, amount) {
-            const ratio = (monthlyPayment / amount) * 100;
+            const ratio = amount > 0 ? (monthlyPayment / amount) * 100 : 0;
             const clampedRatio = Math.min(Math.max(ratio, 0), 12);
             const angle = (clampedRatio / 12) * 180 - 90;
             const needle = document.getElementById('gaugeNeedle');
